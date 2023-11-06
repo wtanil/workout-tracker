@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G816" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activities" representedClassName="Activities" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercises" inverseName="activities" inverseEntity="Exercises"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sessions" inverseName="activities" inverseEntity="Sessions"/>
+        <relationship name="sets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sets" inverseName="activity" inverseEntity="Sets"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="Exercises" representedClassName="Exercises" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="link" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <relationship name="activities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activities" inverseName="exercise" inverseEntity="Activities"/>
+    </entity>
+    <entity name="Reps" representedClassName="Reps" syncable="YES" codeGenerationType="class">
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sets" inverseName="reps" inverseEntity="Sets"/>
+    </entity>
+    <entity name="Sessions" representedClassName="Sessions" syncable="YES" codeGenerationType="class">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="activities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activities" inverseName="session" inverseEntity="Activities"/>
+    </entity>
+    <entity name="Sets" representedClassName="Sets" syncable="YES" codeGenerationType="class">
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activities" inverseName="sets" inverseEntity="Activities"/>
+        <relationship name="reps" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reps" inverseName="set" inverseEntity="Reps"/>
+    </entity>
 </model>
