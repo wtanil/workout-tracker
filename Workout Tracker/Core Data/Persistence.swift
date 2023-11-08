@@ -53,4 +53,54 @@ struct PersistenceController {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+    // from Donny Wals presentation about Core Data and SwiftUI
+    func childViewContext() -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = container.viewContext
+        return context
+    }
+    
+    // from Donny Wals presentation about Core Data and SwiftUI
+    func newTemporaryInstance<T: NSManagedObject>(in context: NSManagedObjectContext) -> T {
+        let entityDescription: NSEntityDescription = NSEntityDescription.entity(forEntityName: String(describing: T.self), in: context)!
+        return T(entity: entityDescription, insertInto: context)
+    }
+    
+    // from Donny Wals presentation about Core Data and SwiftUI
+    func copyForEditing<T: NSManagedObject>(of object: T, in context: NSManagedObjectContext) -> T {
+        guard let object = (try? context.existingObject(with: object.objectID)) as? T else {
+            fatalError("Requested copy of a managed object that doesn't exist")
+        }
+        return object
+    }
+    
+    func delete<T: NSManagedObject>(_ object: T, in context: NSManagedObjectContext) {
+        context.delete(object)
+    }
+    
+    // from Donny Wals presentation about Core Data and SwiftUI
+    func persist(_ object: NSManagedObject) {
+        do {
+            try object.managedObjectContext?.save()
+            if let parent = object.managedObjectContext?.parent {
+                try parent.save()
+            }
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func persist(for context: NSManagedObjectContext) {
+        do {
+            try context.save()
+            if let parent = context.parent {
+                try parent.save()
+            }
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }

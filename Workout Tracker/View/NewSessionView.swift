@@ -1,0 +1,48 @@
+//
+//  NewSessionView.swift
+//  Workout Tracker
+//
+//  Created by William Suryadi Tanil on 06/11/23.
+//
+
+import SwiftUI
+import CoreData
+
+struct NewSessionView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @State private var name: String = ""
+    @State private var note: String = ""
+    @State private var date: Date = Date()
+    @State private var activities = [Activities]()
+    
+    var body: some View {
+        VStack {
+            Form {
+                Section() {
+                    TextField("Name", text: $name)
+                    DatePicker("Date", selection: $date, displayedComponents: [.date, .hourAndMinute])
+                    TextField("Notes", text: $note)
+                }
+                Section("Exercises") {
+                    NavigationLink("Add new exercise", destination: SelectActivitiesView()
+                    )
+                    if !activities.isEmpty {
+                        List(activities, id: \.self) { activity in
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
+        .navigationTitle("New Session")
+    }
+}
+
+struct NewSessionView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewSessionView()
+            .preferredColorScheme(.dark)
+    }
+}
