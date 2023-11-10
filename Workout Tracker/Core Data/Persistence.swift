@@ -10,24 +10,6 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
-    static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-//            let newItem = Item(context: viewContext)
-//            newItem.timestamp = Date()
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
-
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
@@ -103,4 +85,59 @@ struct PersistenceController {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
+}
+
+extension PersistenceController {
+    static var preview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        // Adding placeholder items for preview
+        // Exercises
+        var exercises = [Exercises]()
+        for index in 0 ..< 10 {
+            let newExercise = Exercises(context: viewContext)
+            newExercise.target = Target.allCases[index % 9].rawValue
+            newExercise.id = UUID()
+            newExercise.name = "Exercise \(index)"
+            newExercise.note = "Note Note \(index)"
+            newExercise.link = "Link Link \(index)"
+            newExercise.category = Category.allCases[index % 7].rawValue
+            exercises.append(newExercise)
+        }
+        // Session Activities Sets
+        // new Session
+        let newSession = Sessions(context: viewContext)
+        newSession.name = "Session 1"
+        var activities = [Activities]()
+        for index in 0 ..< 5 {
+            let newActivity = Activities(context: viewContext)
+            newActivity.id = UUID()
+            newActivity.order = Int16(index)
+            newActivity.session = newSession
+            newActivity.exercise = exercises[index]
+            activities.append(newActivity)
+        }
+        
+        for index in 0 ..< 12 {
+            let newSet = Sets(context: viewContext)
+            newSet.isFailure = false
+            newSet.isBodyWeight = false
+            newSet.order = Int16(index)
+            newSet.rep = Int32.random(in: 5 ... 10)
+            newSet.type = "type \(index)"
+            newSet.unit = "unit \(index)"
+            newSet.value = Int32.random(in: 50 ... 100)
+            newSet.activity = activities[index % 5]
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
 }

@@ -26,7 +26,7 @@ struct HomeView: View {
                     }
                 }
                 List {
-                    ForEach(0..<10) {
+                    ForEach(0 ..< 10) {
                         if $0 == 0 {
                             NavigationLink("Add new", destination: NewSessionView())
                         }

@@ -9,5 +9,8 @@ import Foundation
 import CoreData
 
 extension Sets {
-    
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
+        
+    }
 }

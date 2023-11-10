@@ -14,7 +14,8 @@ struct NewSessionView: View {
     @State private var name: String = ""
     @State private var note: String = ""
     @State private var date: Date = Date()
-    @State private var activities = [Activities]()
+    @State var activities = [Activities]()
+    
     
     var body: some View {
         VStack {
@@ -25,14 +26,16 @@ struct NewSessionView: View {
                     TextField("Notes", text: $note)
                 }
                 Section("Exercises") {
-                    NavigationLink("Add new exercise", destination: SelectActivitiesView()
+                    NavigationLink("Add new exercise", destination: SelectActivitiesView(activities: $activities)
                     )
+                    
                     if !activities.isEmpty {
-                        List(activities, id: \.self) { activity in
-                            
+                        List(activities) { activity in
+                            VStack {
+                                Text(activity.exercise!.name ?? "Unknown")
+                            }
                         }
                     }
-                    
                 }
             }
         }
@@ -44,5 +47,6 @@ struct NewSessionView_Previews: PreviewProvider {
     static var previews: some View {
         NewSessionView()
             .preferredColorScheme(.dark)
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
