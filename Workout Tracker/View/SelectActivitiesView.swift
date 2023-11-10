@@ -33,7 +33,7 @@ struct SelectActivitiesView: View {
                             activities.remove(at: indexToDelete!)
                             
                         } else {
-                            let newActivity = Activity.make(in: managedObjectContext, notes: "")
+                            let newActivity = Activity.make(in: managedObjectContext, note: "")
                             newActivity.exercise = exercise
                             activities.append(newActivity)
                             dict[exercise.id!] = newActivity
@@ -57,8 +57,9 @@ struct SelectActivitiesView: View {
 
 struct SelectActivitiesView_Previews: PreviewProvider {
     static var previews: some View {
+        let context = PersistenceController.preview.container.viewContext
         SelectActivitiesView(activities: .constant([Activity]()))
             .preferredColorScheme(.dark)
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, context)
     }
 }

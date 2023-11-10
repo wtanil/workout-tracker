@@ -33,6 +33,23 @@ extension Session {
     }
 }
 
+extension Session {
+    static func make(in context: NSManagedObjectContext,
+                     name: String,
+                     date: Date,
+                     note: String
+    ) -> Session {
+//        let entityDescription = NSEntityDescription.entity(forEntityName: "Session", in: context)
+//        let session = Session(entity: entityDescription!, insertInto: context)
+        let session = Session(context: context)
+        session.name = name
+        session.date = date
+        session.note = note
+        
+        return session
+    }
+}
+
 /*
  createDate: Date
  date: Date

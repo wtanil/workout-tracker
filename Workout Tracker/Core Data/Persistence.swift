@@ -95,38 +95,39 @@ extension PersistenceController {
         // Exercises
         var exercises = [Exercise]()
         for index in 0 ..< 10 {
-            let newExercise = Exercise(context: viewContext)
-            newExercise.target = Target.allCases[index % 9].rawValue
-            newExercise.id = UUID()
-            newExercise.name = "Exercise \(index)"
-            newExercise.note = "Note Note \(index)"
-            newExercise.link = "Link Link \(index)"
-            newExercise.category = Category.allCases[index % 7].rawValue
+            let newExercise = Exercise.make(
+                in: viewContext,
+                name: "Exercise \(index)",
+                category: Category.allCases[index % 7].rawValue,
+                target: Target.allCases[index % 9].rawValue,
+                link: "Link Link \(index)",
+                note: "Note Note \(index)")
             exercises.append(newExercise)
         }
         // Session Activities Sets
         // new Session
-        let newSession = Session(context: viewContext)
-        newSession.name = "Session 1"
+        let newSession = Session.make(in: viewContext,
+                                      name: "Session 1",
+                                      date: Date(),
+                                      note: "")
+        // new Activities
         var activities = [Activity]()
         for index in 0 ..< 5 {
-            let newActivity = Activity(context: viewContext)
-            newActivity.id = UUID()
+            let newActivity = Activity.make(in: viewContext,
+                                            note: "")
             newActivity.order = Int16(index)
             newActivity.session = newSession
             newActivity.exercise = exercises[index]
             activities.append(newActivity)
         }
-        
+        // new Sets
         for index in 0 ..< 12 {
-            let newSet = Set(context: viewContext)
-            newSet.isFailure = false
-            newSet.isBodyWeight = false
-            newSet.order = Int16(index)
-            newSet.rep = Int32.random(in: 5 ... 10)
-            newSet.type = "type \(index)"
-            newSet.unit = "unit \(index)"
-            newSet.value = Int32.random(in: 50 ... 100)
+            let newSet = Set.make(in: viewContext,
+                                  order: index,
+                                  rep: Int.random(in: 5 ... 10),
+                                  value: Int.random(in: 50 ... 100),
+                                  type: "type \(index)",
+                                  unit: "u\(index)")
             newSet.activity = activities[index % 5]
         }
         

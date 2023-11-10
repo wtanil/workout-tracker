@@ -15,6 +15,28 @@ extension Exercise {
     }
 }
 
+extension Exercise {
+    static func make(in context: NSManagedObjectContext,
+                     name: String,
+                     category: String,
+                     target: String,
+                     link: String,
+                     note: String
+                     ) -> Exercise {
+//        let entityDescription = NSEntityDescription.entity(forEntityName: "Exercise", in: context)
+//        let exercise = Exercise(entity: entityDescription!, insertInto: context)
+        let exercise = Exercise(context: context)
+        exercise.id = UUID()
+        exercise.category = category
+        exercise.link = link
+        exercise.name = name
+        exercise.note = note
+        exercise.target = target
+        
+        return exercise
+    }
+}
+
 /*
  category: String
  id: UUID
