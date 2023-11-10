@@ -16,30 +16,31 @@ struct HomeView: View {
         
         NavigationView {
             VStack(alignment: .leading) {
+//                ScrollView(.horizontal) {
+//                    HStack(spacing: 20) {
+//                        ForEach(0..<10) {
+//                            Text("Placeholder \($0)")
+//                                .foregroundStyle(.white)
+//                                .font(.body)
+//                                .frame(width: 200, height: 100)
+//                                .background(Color.gray)
+//                        }
+//                    }
+//                }
                 
-                ScrollView(.horizontal) {
-                    HStack(spacing: 20) {
-                        ForEach(0..<10) {
-                            Text("Placeholder \($0)")
-                                .foregroundStyle(.white)
-                                .font(.body)
-                                .frame(width: 200, height: 100)
-                                .background(Color.gray)
+                List {
+                    Section {
+                        NavigationLink("Start A New Session", destination: NewSessionView())
+                            .buttonStyle(.borderedProminent)
+                    }
+                    Section("Past Sessions") {
+                        ForEach(sessions) { session in
+                            VStack(alignment: .leading) {
+                                Text(session.displayDate)
+                                Text(session.displayName)
+                            }
                         }
                     }
-                }
-                HStack(alignment: .center) {
-                    NavigationLink("Add new", destination: NewSessionView())
-                        .buttonStyle(.borderedProminent)
-                }
-                
-                    
-                
-                List(sessions) { session in
-                    VStack(alignment: .leading) {
-                        Text(session.displayDate)
-                        Text(session.displayName)
-                    }    
                 }
                 .listStyle(GroupedListStyle())
             }

@@ -16,7 +16,6 @@ struct NewSessionView: View {
     @State private var date: Date = Date()
     @State var activities = [Activity]()
     
-    
     var body: some View {
         VStack {
             Form {
@@ -26,13 +25,20 @@ struct NewSessionView: View {
                     TextField("Notes", text: $note)
                 }
                 Section("Exercises") {
-                    NavigationLink("Add new exercise", destination: SelectActivitiesView(activities: $activities)
+                    NavigationLink("Add a new exercise", destination: SelectActivitiesView(activities: $activities)
                     )
                     
                     if !activities.isEmpty {
                         List(activities) { activity in
-                            VStack {
+                            HStack {
                                 Text(activity.exercise!.displayName)
+                                Spacer()
+                                Button(action: {
+                                    let indexToDelete = activities.firstIndex(of: activity)
+                                    activities.remove(at: indexToDelete!)
+                                }, label: {
+                                    Image(systemName: "trash")
+                                })
                             }
                         }
                     }
