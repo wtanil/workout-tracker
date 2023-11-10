@@ -60,6 +60,13 @@ struct NewSessionView: View {
                 activities[index].order = Int16(index)
             }
             newSession.computedActivities = activities
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
         }, label: {
             Text("Finish")
         })
