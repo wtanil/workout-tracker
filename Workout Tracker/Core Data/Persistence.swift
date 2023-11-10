@@ -120,15 +120,15 @@ extension PersistenceController {
             newActivity.exercise = exercises[index]
             activities.append(newActivity)
         }
-        // new Sets
+        // new ActivitySets
         for index in 0 ..< 12 {
-            let newSet = Set.make(in: viewContext,
+            let newActivitySet = ActivitySet.make(in: viewContext,
                                   order: index,
                                   rep: Int.random(in: 5 ... 10),
                                   value: Double(Int.random(in: 50 ... 100)),
                                   type: "type \(index)",
                                   unit: "u\(index)")
-            newSet.activity = activities[index % 5]
+            newActivitySet.activity = activities[index % 5]
         }
         
         // another session

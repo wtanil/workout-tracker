@@ -6,7 +6,17 @@
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="activities" inverseEntity="Exercise"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="activities" inverseEntity="Session"/>
-        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Set" inverseName="activity" inverseEntity="Set"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActivitySet" inverseName="activity" inverseEntity="ActivitySet"/>
+    </entity>
+    <entity name="ActivitySet" representedClassName="ActivitySet" syncable="YES" codeGenerationType="class">
+        <attribute name="isBodyWeight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFailure" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rep" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="sets" inverseEntity="Activity"/>
     </entity>
     <entity name="Exercise" representedClassName="Exercise" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String"/>
@@ -24,15 +34,5 @@
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="session" inverseEntity="Activity"/>
-    </entity>
-    <entity name="Set" representedClassName="Set" syncable="YES" codeGenerationType="class">
-        <attribute name="isBodyWeight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isFailure" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="rep" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
-        <attribute name="unit" optional="YES" attributeType="String"/>
-        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="sets" inverseEntity="Activity"/>
     </entity>
 </model>

@@ -53,6 +53,24 @@ extension Session {
         guard let date = date else { return "Unknown date" }
         return DateFormatter.dateFormatterMediumShort.string(from: date)
     }
+    
+    var activitiesAsArray: [Activity] {
+        guard let activities = activities else {
+            return [Activity]()
+        }
+        let set = activities as! Set<Activity>
+        let array: [Activity] = Array(set)
+        return array
+    }
+    
+    var computedActivities: [Activity] {
+        get {
+            activitiesAsArray
+        }
+        set {
+            self.activities = NSSet(array: newValue)
+        }
+    }
 }
 
 extension Session {

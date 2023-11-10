@@ -11,7 +11,7 @@ import CoreData
 struct NewSessionView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @State private var name: String = ""
+    @State private var name: String = "New Session"
     @State private var note: String = ""
     @State private var date: Date = Date()
     @State var activities = [Activity]()
@@ -46,6 +46,23 @@ struct NewSessionView: View {
             }
         }
         .navigationTitle("New Session")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                navigationBarTrailingItem
+            }
+        }
+    }
+    
+    private var navigationBarTrailingItem: some View {
+        Button(action: {
+            let newSession = Session.make(in: managedObjectContext, name: name, date: date, note: note)
+            for index in 0 ..< activities.count {
+                activities[index].order = Int16(index)
+            }
+            newSession.computedActivities = activities
+        }, label: {
+            Text("Finish")
+        })
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  Set+extension.swift
+//  ActivitySet.swift
 //  Workout Tracker
 //
 //  Created by William Suryadi Tanil on 10/11/23.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-extension Set {
+extension ActivitySet {
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         
@@ -20,7 +20,7 @@ extension Set {
     }
 }
 
-extension Set {
+extension ActivitySet {
     var orderAsInt: Int {
         Int(order)
     }
@@ -36,24 +36,24 @@ extension Set {
     
 }
 
-extension Set {
+extension ActivitySet {
     static func make(in context: NSManagedObjectContext,
                      order: Int,
                      rep: Int,
                      value: Double,
                      type: String,
                      unit: String
-    ) -> Set {
-//        let entityDescription = NSEntityDescription.entity(forEntityName: "Set", in: context)
-//        let set = Set(entity: entityDescription!, insertInto: context)
-        let set = Set(context: context)
-        set.order = Int16(order)
-        set.rep = Int32(rep)
-        set.value = value
-        set.type = type
-        set.unit = unit
+    ) -> ActivitySet {
+        //        let entityDescription = NSEntityDescription.entity(forEntityName: "Set", in: context)
+        //        let set = Set(entity: entityDescription!, insertInto: context)
+        let activitySet = ActivitySet(context: context)
+        activitySet.order = Int16(order)
+        activitySet.rep = Int32(rep)
+        activitySet.value = value
+        activitySet.type = type
+        activitySet.unit = unit
         
-        return set
+        return activitySet
     }
 }
 
