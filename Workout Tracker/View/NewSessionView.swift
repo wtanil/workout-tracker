@@ -32,7 +32,7 @@ struct NewSessionView: View {
                     if !activities.isEmpty {
                         List(activities) { activity in
                             VStack {
-                                Text(activity.exercise!.name ?? "Unknown")
+                                Text(activity.exercise!.displayName)
                             }
                         }
                     }

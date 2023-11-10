@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         
         NavigationView {
-            VStack {
+            VStack(alignment: .leading) {
                 
                 ScrollView(.horizontal) {
                     HStack(spacing: 20) {
@@ -28,13 +28,20 @@ struct HomeView: View {
                         }
                     }
                 }
-                Spacer()
-                NavigationLink("Add new", destination: NewSessionView())
+                HStack(alignment: .center) {
+                    NavigationLink("Add new", destination: NewSessionView())
+                        .buttonStyle(.borderedProminent)
+                }
+                
+                    
                 
                 List(sessions) { session in
-                    Text(session.name!)
-                        
+                    VStack(alignment: .leading) {
+                        Text(session.displayDate)
+                        Text(session.displayName)
+                    }    
                 }
+                .listStyle(GroupedListStyle())
             }
             .navigationTitle("Home")
         }

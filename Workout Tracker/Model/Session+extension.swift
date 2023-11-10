@@ -51,7 +51,7 @@ extension Session {
     
     private func formattedDate(for date: Date?) -> String {
         guard let date = date else { return "Unknown date" }
-        return DateFormatter.dateFormatterMediumMedium.string(from: date)
+        return DateFormatter.dateFormatterMediumShort.string(from: date)
     }
 }
 

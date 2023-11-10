@@ -40,15 +40,15 @@ struct SelectActivitiesView: View {
                         }
                     }, label: {
                         HStack {
-                            Text(exercise.name ?? "Unknown")
+                            Text(exercise.displayName)
                             Spacer()
                             if dict[exercise.id!] != nil {
                                 Image(systemName: "checkmark")
                             }
-                            
                         }
                     })
                 }
+                .listStyle(GroupedListStyle())
             }
         }
         .navigationTitle("Select exercises")
