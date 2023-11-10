@@ -10,6 +10,8 @@ import CoreData
 
 struct NewSessionView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     
     @State private var name: String = "New Session"
     @State private var note: String = ""
@@ -67,6 +69,8 @@ struct NewSessionView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+            presentationMode.wrappedValue.dismiss()
+
         }, label: {
             Text("Finish")
         })
