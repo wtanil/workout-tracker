@@ -18,8 +18,33 @@ extension Activity {
 }
 
 extension Activity {
+    var displayExerciseName: String {
+        guard let exercise = exercise else {
+            return "Unknown Exercise"
+        }
+        return exercise.displayName
+    }
+    
     var displayNote: String {
         note ?? "..."
+    }
+    
+    var activitySetAsArray: [ActivitySet] {
+        guard let activitySet = sets else {
+            return [ActivitySet]()
+        }
+        let set = activitySet as! Set<ActivitySet>
+        return Array(set)
+        
+    }
+    
+    var computedActivities: [ActivitySet] {
+        get {
+            activitySetAsArray
+        }
+        set {
+            self.sets = NSSet(array: newValue)
+        }
     }
 }
 

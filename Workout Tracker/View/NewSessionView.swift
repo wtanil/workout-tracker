@@ -33,7 +33,7 @@ struct NewSessionView: View {
                     if !activities.isEmpty {
                         List(activities) { activity in
                             HStack {
-                                Text(activity.exercise!.displayName)
+                                Text(activity.displayExerciseName)
                                 Spacer()
                                 Button(action: {
                                     let indexToDelete = activities.firstIndex(of: activity)
