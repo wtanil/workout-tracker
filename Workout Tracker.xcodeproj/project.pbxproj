@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA1A16812AF8D64B001B7149 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A16802AF8D64B001B7149 /* HomeView.swift */; };
+		AA3F479F2AFE099C00E55B9D /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */; };
 		AA4223F82AF8E62B0023E55B /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4223F72AF8E62B0023E55B /* NewSessionView.swift */; };
 		AA439D432AEF9C7600D2D383 /* Workout_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA439D422AEF9C7600D2D383 /* Workout_TrackerApp.swift */; };
 		AA439D452AEF9C7600D2D383 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA439D442AEF9C7600D2D383 /* ContentView.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		AA1A16802AF8D64B001B7149 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		AA4223F72AF8E62B0023E55B /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		AA439D3F2AEF9C7600D2D383 /* Workout Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Workout Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA439D422AEF9C7600D2D383 /* Workout_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout_TrackerApp.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA3F479D2AFE097900E55B9D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		AA439D362AEF9C7600D2D383 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 				AAD760302AFB5B6700CC6DA9 /* View */,
 				AAD760332AFB6A3D00CC6DA9 /* Model */,
 				AAD7602F2AFB5B5200CC6DA9 /* Core Data */,
+				AA3F479D2AFE097900E55B9D /* Helper */,
 				AAD7603E2AFB6E4B00CC6DA9 /* Resources */,
 				AA439D482AEF9C7800D2D383 /* Preview Content */,
 			);
@@ -332,6 +343,7 @@
 				AA439D4F2AEF9C7800D2D383 /* Workout_Tracker.xcdatamodeld in Sources */,
 				AAD760422AFB73B400CC6DA9 /* Target.swift in Sources */,
 				AAC980FB2AFDD10F00816BE9 /* Set+extension.swift in Sources */,
+				AA3F479F2AFE099C00E55B9D /* DateFormatter.swift in Sources */,
 				AA1A16812AF8D64B001B7149 /* HomeView.swift in Sources */,
 				AA439D432AEF9C7600D2D383 /* Workout_TrackerApp.swift in Sources */,
 				AAD760402AFB6E6700CC6DA9 /* Category.swift in Sources */,

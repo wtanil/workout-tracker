@@ -21,10 +21,26 @@ extension Set {
 }
 
 extension Set {
+    var orderAsInt: Int {
+        Int(order)
+    }
+    var repAsInt: Int {
+        Int(rep)
+    }
+    var displayType: String {
+        type ?? "-"
+    }
+    var displayUnit: String {
+        unit ?? "-"
+    }
+    
+}
+
+extension Set {
     static func make(in context: NSManagedObjectContext,
                      order: Int,
                      rep: Int,
-                     value: Int,
+                     value: Double,
                      type: String,
                      unit: String
     ) -> Set {
@@ -33,7 +49,7 @@ extension Set {
         let set = Set(context: context)
         set.order = Int16(order)
         set.rep = Int32(rep)
-        set.value = Int32(value)
+        set.value = value
         set.type = type
         set.unit = unit
         

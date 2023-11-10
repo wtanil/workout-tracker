@@ -18,6 +18,12 @@ extension Activity {
 }
 
 extension Activity {
+    var displayNote: String {
+        note ?? "..."
+    }
+}
+
+extension Activity {
     static func make(in context: NSManagedObjectContext,
                      note: String) -> Activity {
 //        let entityDescription = NSEntityDescription.entity(forEntityName: "Activity", in: context)
@@ -31,7 +37,7 @@ extension Activity {
     
     /*
      id: UUID
-     notes: String
+     note: String
      order: Int16
      exercise
      session

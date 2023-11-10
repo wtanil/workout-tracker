@@ -17,7 +17,6 @@ extension Session {
         setPrimitiveValue(Date(), forKey: "date")
         setPrimitiveValue(Date(), forKey: "createDate")
         setPrimitiveValue(Date(), forKey: "updateDate")
-        
     }
     
     override public func willSave() {
@@ -30,6 +29,29 @@ extension Session {
             self.updateDate = Date()
         }
         super.willSave()
+    }
+}
+
+extension Session {
+    var displayName: String {
+        name ?? "Unknown name"
+    }
+    
+    var displayDate: String {
+        formattedDate(for: date)
+    }
+    
+    var displayCreateDate: String {
+        formattedDate(for: createDate)
+    }
+    
+    var displayUpdateDate: String {
+        formattedDate(for: updateDate)
+    }
+    
+    private func formattedDate(for date: Date?) -> String {
+        guard let date = date else { return "Unknown date" }
+        return DateFormatter.dateFormatterMediumMedium.string(from: date)
     }
 }
 

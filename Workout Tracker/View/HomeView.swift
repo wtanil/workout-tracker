@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HomeView: View {
+    
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) private var sessions: FetchedResults<Session>
     
     var body: some View {
         
@@ -25,16 +28,12 @@ struct HomeView: View {
                         }
                     }
                 }
-                List {
-                    ForEach(0 ..< 10) {
-                        if $0 == 0 {
-                            NavigationLink("Add new", destination: NewSessionView())
-                        }
-                        Text("Placeholder \($0)")
-                            .font(.body)
-                            .frame(width: 200, height: 50)
-                            .background(Color.gray)
-                    }
+                Spacer()
+                NavigationLink("Add new", destination: NewSessionView())
+                
+                List(sessions) { session in
+                    Text(session.name!)
+                        
                 }
             }
             .navigationTitle("Home")

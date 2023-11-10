@@ -16,6 +16,28 @@ extension Exercise {
 }
 
 extension Exercise {
+    var displayName: String {
+        name ?? "Unknown Name"
+    }
+    
+    var displayCategory: String {
+        category ?? "-"
+    }
+    
+    var displayTarget: String {
+        target ?? "-"
+    }
+    
+    var displayLink: String {
+        link ?? ""
+    }
+    
+    var displayNote: String {
+        note ?? ""
+    }
+}
+
+extension Exercise {
     static func make(in context: NSManagedObjectContext,
                      name: String,
                      category: String,
