@@ -14,7 +14,7 @@ struct NewSessionView: View {
     @State private var name: String = ""
     @State private var note: String = ""
     @State private var date: Date = Date()
-    @State var activities = [Activities]()
+    @State var activities = [Activity]()
     
     
     var body: some View {

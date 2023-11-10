@@ -1,14 +1,14 @@
 //
-//  Sessions+extension.swift
+//  Session+extension.swift
 //  Workout Tracker
 //
-//  Created by William Suryadi Tanil on 08/11/23.
+//  Created by William Suryadi Tanil on 10/11/23.
 //
 
 import Foundation
 import CoreData
 
-extension Sessions {
+extension Session {
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         
@@ -32,3 +32,12 @@ extension Sessions {
         super.willSave()
     }
 }
+
+/*
+ createDate: Date
+ date: Date
+ name: String
+ note: String
+ updateDate: Date
+ activities
+ */

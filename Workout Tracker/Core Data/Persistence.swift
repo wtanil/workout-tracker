@@ -93,9 +93,9 @@ extension PersistenceController {
         let viewContext = result.container.viewContext
         // Adding placeholder items for preview
         // Exercises
-        var exercises = [Exercises]()
+        var exercises = [Exercise]()
         for index in 0 ..< 10 {
-            let newExercise = Exercises(context: viewContext)
+            let newExercise = Exercise(context: viewContext)
             newExercise.target = Target.allCases[index % 9].rawValue
             newExercise.id = UUID()
             newExercise.name = "Exercise \(index)"
@@ -106,11 +106,11 @@ extension PersistenceController {
         }
         // Session Activities Sets
         // new Session
-        let newSession = Sessions(context: viewContext)
+        let newSession = Session(context: viewContext)
         newSession.name = "Session 1"
-        var activities = [Activities]()
+        var activities = [Activity]()
         for index in 0 ..< 5 {
-            let newActivity = Activities(context: viewContext)
+            let newActivity = Activity(context: viewContext)
             newActivity.id = UUID()
             newActivity.order = Int16(index)
             newActivity.session = newSession
@@ -119,7 +119,7 @@ extension PersistenceController {
         }
         
         for index in 0 ..< 12 {
-            let newSet = Sets(context: viewContext)
+            let newSet = Set(context: viewContext)
             newSet.isFailure = false
             newSet.isBodyWeight = false
             newSet.order = Int16(index)
