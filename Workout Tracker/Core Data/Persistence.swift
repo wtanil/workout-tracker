@@ -123,7 +123,6 @@ extension PersistenceController {
         // new ActivitySets
         for index in 0 ..< 12 {
             let newActivitySet = ActivitySet.make(in: viewContext,
-                                  order: index,
                                   rep: Int.random(in: 5 ... 10),
                                   value: Double(Int.random(in: 50 ... 100)),
                                   type: "type \(index)",

@@ -16,17 +16,6 @@ struct HomeView: View {
         
         NavigationView {
             VStack(alignment: .leading) {
-//                ScrollView(.horizontal) {
-//                    HStack(spacing: 20) {
-//                        ForEach(0..<10) {
-//                            Text("Placeholder \($0)")
-//                                .foregroundStyle(.white)
-//                                .font(.body)
-//                                .frame(width: 200, height: 100)
-//                                .background(Color.gray)
-//                        }
-//                    }
-//                }
                 
                 List {
                     Section {

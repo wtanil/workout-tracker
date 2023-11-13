@@ -10,22 +10,24 @@ import CoreData
 
 struct SelectActivitiesView: View {
     
+    // future: solution to avoid using environment (donny walsh and paul hudson methods
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    // shorts idea: (on preview canvas) why entity not found when xcdatamodel changed
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) private var exercises: FetchedResults<Exercise>
     @Binding var activities: [Activity]
+    // shorts idea: using dict and uuid to keep track
     @State private var dict = [UUID: Activity]() // exercise ID: new activity
     
     var body: some View {
         VStack(alignment: .leading) {
-            
+            // shorts idea: fallback is good
             if exercises.isEmpty {
                 // add new exercise
                 Text("There is no exercise")
             }
             else {
                 List(exercises) { exercise in
-                    
                     Button(action: {
                         if let activity = dict[exercise.id!] {
                             dict.removeValue(forKey: exercise.id!)
@@ -37,6 +39,7 @@ struct SelectActivitiesView: View {
                             newActivity.exercise = exercise
                             activities.append(newActivity)
                             dict[exercise.id!] = newActivity
+                            
                         }
                     }, label: {
                         HStack {

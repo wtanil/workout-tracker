@@ -29,22 +29,32 @@ extension Activity {
         note ?? "..."
     }
     
-    var activitySetAsArray: [ActivitySet] {
-        guard let activitySet = sets else {
+    var activitySetsAsArray: [ActivitySet] {
+        guard let activitySets = sets else {
             return [ActivitySet]()
         }
-        let set = activitySet as! Set<ActivitySet>
-        return Array(set)
+        let set = activitySets as! Set<ActivitySet>
+        let array = Array(set).sorted { $0.createDate! < $1.createDate! }
+        return array
         
     }
     
-    var computedActivities: [ActivitySet] {
+    var computedActivitySets: [ActivitySet] {
         get {
-            activitySetAsArray
+            activitySetsAsArray
         }
         set {
             self.sets = NSSet(array: newValue)
         }
+    }
+    
+    func remove(_ activitySet: ActivitySet) {
+        if let sets {
+            var activitySets = sets as! Set<ActivitySet>
+            _ = activitySets.remove(activitySet)
+            self.sets = NSSet(set: activitySets)
+        }
+        
     }
 }
 

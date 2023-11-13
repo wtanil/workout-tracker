@@ -11,12 +11,13 @@ import CoreData
 struct NewSessionView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     
     @State private var name: String = "New Session"
     @State private var note: String = ""
     @State private var date: Date = Date()
     @State var activities = [Activity]()
+    
+    @State private var showingSelectActivityView = false
     
     var body: some View {
         VStack {
@@ -26,23 +27,41 @@ struct NewSessionView: View {
                     DatePicker("Date", selection: $date, displayedComponents: [.date, .hourAndMinute])
                     TextField("Notes", text: $note)
                 }
-                Section("Exercises") {
-                    NavigationLink("Add a new exercise", destination: SelectActivitiesView(activities: $activities)
-                    )
-                    
-                    if !activities.isEmpty {
-                        List(activities) { activity in
-                            HStack {
-                                Text(activity.displayExerciseName)
-                                Spacer()
-                                Button(action: {
-                                    let indexToDelete = activities.firstIndex(of: activity)
-                                    activities.remove(at: indexToDelete!)
-                                }, label: {
-                                    Image(systemName: "trash")
-                                })
+                Section {
+                    Button(action: {
+                        self.showingSelectActivityView.toggle()
+                    }, label: {
+                        Text("Add a new exercise")
+                    })
+                }
+                
+                if !activities.isEmpty {
+                    ForEach(activities) { activity in
+                        Section(header: Text(activity.displayExerciseName)) {
+                            VStack(alignment: .center) {
+                                HStack {
+                                    Button(action: {
+                                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, type: "type", unit: "kg")
+                                        var setAsArray = activity.computedActivitySets
+                                        setAsArray.append(newSet)
+                                        activity.computedActivitySets = setAsArray
+                                    }, label: {
+                                        Text(Image(systemName: "plus")) + Text(" Add set")
+                                    })
+                                    Spacer()
+                                    Button(role: .destructive, action: {
+                                        let indexToDelete = activities.firstIndex(of: activity)
+                                        activities.remove(at: indexToDelete!)
+                                    }, label: {
+                                        Image(systemName: "trash")
+                                    })
+                                }
+                                
+                                ActivityRowView(activity: activity)
                             }
+                            .buttonStyle(.borderless)
                         }
+                        
                     }
                 }
             }
@@ -53,6 +72,10 @@ struct NewSessionView: View {
                 navigationBarTrailingItem
             }
         }
+        .sheet(isPresented: $showingSelectActivityView) {
+            SelectActivitiesView(activities: $activities)
+        }
+        
     }
     
     private var navigationBarTrailingItem: some View {
@@ -70,7 +93,7 @@ struct NewSessionView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
             presentationMode.wrappedValue.dismiss()
-
+            
         }, label: {
             Text("Finish")
         })

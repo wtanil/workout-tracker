@@ -1,5 +1,5 @@
 //
-//  ActivitySet.swift
+//  ActivitySet+extension.swift
 //  Workout Tracker
 //
 //  Created by William Suryadi Tanil on 10/11/23.
@@ -17,13 +17,12 @@ extension ActivitySet {
         setPrimitiveValue("kg", forKey: "unit")
         setPrimitiveValue(false, forKey: "isBodyWeight")
         setPrimitiveValue(false, forKey: "isFailure")
+        setPrimitiveValue(Date(), forKey: "createDate")
     }
 }
 
 extension ActivitySet {
-    var orderAsInt: Int {
-        Int(order)
-    }
+    
     var repAsInt: Int {
         Int(rep)
     }
@@ -34,11 +33,27 @@ extension ActivitySet {
         unit ?? "-"
     }
     
+    func setUnit(to newValue: String) {
+        self.unit = newValue
+        self.objectWillChange.send()
+    }
+    
+    func setRep(to newValue: Int) {
+        var newValue = newValue
+        if newValue > Int(Int32.max) {
+            newValue %= Int(Int32.max)
+        }
+        self.rep = Int32(newValue)
+    }
+    
+    func setValue(to newValue: Double) {
+        self.value = newValue
+    }
+    
 }
 
 extension ActivitySet {
     static func make(in context: NSManagedObjectContext,
-                     order: Int,
                      rep: Int,
                      value: Double,
                      type: String,
@@ -47,7 +62,6 @@ extension ActivitySet {
         //        let entityDescription = NSEntityDescription.entity(forEntityName: "Set", in: context)
         //        let set = Set(entity: entityDescription!, insertInto: context)
         let activitySet = ActivitySet(context: context)
-        activitySet.order = Int16(order)
         activitySet.rep = Int32(rep)
         activitySet.value = value
         activitySet.type = type
@@ -67,3 +81,4 @@ extension ActivitySet {
  value: Integer 32
  activity
  */
+
