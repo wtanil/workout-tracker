@@ -109,12 +109,13 @@ extension PersistenceController {
         let newSession = Session.make(in: viewContext,
                                       name: "Session 1",
                                       date: Date(),
-                                      note: "")
+                                      note: "note 1")
         // new Activities
         var activities = [Activity]()
         for index in 0 ..< 5 {
+            var note = index == 0 ? "" : "notenote\(index)"
             let newActivity = Activity.make(in: viewContext,
-                                            note: "")
+                                            note: note)
             newActivity.order = Int16(index)
             newActivity.session = newSession
             newActivity.exercise = exercises[index]
@@ -122,12 +123,15 @@ extension PersistenceController {
         }
         // new ActivitySets
         for index in 0 ..< 12 {
+            var unit = ActivityUnit.allCases[index % 5].rawValue
             let newActivitySet = ActivitySet.make(in: viewContext,
                                   rep: Int.random(in: 5 ... 10),
                                   value: Double(Int.random(in: 50 ... 100)),
                                   type: "type \(index)",
-                                  unit: "u\(index)")
+                                  unit: unit)
             newActivitySet.activity = activities[index % 5]
+            newActivitySet.isFailure = Bool.random()
+            newActivitySet.isBodyWeight = Bool.random()
         }
         
         // another session

@@ -23,6 +23,9 @@
 		AA439D652AEF9C7900D2D383 /* Workout_TrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA439D642AEF9C7900D2D383 /* Workout_TrackerUITestsLaunchTests.swift */; };
 		AAA229532B01DFCE0088A7EA /* ActivitySetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA229522B01DFCE0088A7EA /* ActivitySetRowView.swift */; };
 		AAA229572B020E5D0088A7EA /* ActivityRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA229562B020E5D0088A7EA /* ActivityRowView.swift */; };
+		AAB9BD8E2B031ED700FFD585 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9BD8D2B031ED700FFD585 /* SessionView.swift */; };
+		AAB9BD902B03474E00FFD585 /* NumberFormatter+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9BD8F2B03474E00FFD585 /* NumberFormatter+extension.swift */; };
+		AAB9BD922B03505A00FFD585 /* HomeSessionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9BD912B03505A00FFD585 /* HomeSessionRowView.swift */; };
 		AAC980FF2AFDD13900816BE9 /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC980FE2AFDD13900816BE9 /* Session+extension.swift */; };
 		AAC981012AFDD14300816BE9 /* Exercise+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC981002AFDD14300816BE9 /* Exercise+extension.swift */; };
 		AAC981032AFDD14D00816BE9 /* Activity+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC981022AFDD14D00816BE9 /* Activity+extension.swift */; };
@@ -68,6 +71,9 @@
 		AA439D642AEF9C7900D2D383 /* Workout_TrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout_TrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		AAA229522B01DFCE0088A7EA /* ActivitySetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySetRowView.swift; sourceTree = "<group>"; };
 		AAA229562B020E5D0088A7EA /* ActivityRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRowView.swift; sourceTree = "<group>"; };
+		AAB9BD8D2B031ED700FFD585 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		AAB9BD8F2B03474E00FFD585 /* NumberFormatter+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+extension.swift"; sourceTree = "<group>"; };
+		AAB9BD912B03505A00FFD585 /* HomeSessionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSessionRowView.swift; sourceTree = "<group>"; };
 		AAC980FE2AFDD13900816BE9 /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
 		AAC981002AFDD14300816BE9 /* Exercise+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+extension.swift"; sourceTree = "<group>"; };
 		AAC981022AFDD14D00816BE9 /* Activity+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+extension.swift"; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */,
+				AAB9BD8F2B03474E00FFD585 /* NumberFormatter+extension.swift */,
 				AA3F47A42AFE55C400E55B9D /* Binding+extension.swift */,
 			);
 			path = Helper;
@@ -169,6 +176,16 @@
 			path = "Workout TrackerUITests";
 			sourceTree = "<group>";
 		};
+		AAB9BD8C2B031EB000FFD585 /* Row */ = {
+			isa = PBXGroup;
+			children = (
+				AAA229562B020E5D0088A7EA /* ActivityRowView.swift */,
+				AAA229522B01DFCE0088A7EA /* ActivitySetRowView.swift */,
+				AAB9BD912B03505A00FFD585 /* HomeSessionRowView.swift */,
+			);
+			path = Row;
+			sourceTree = "<group>";
+		};
 		AAD7602F2AFB5B5200CC6DA9 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,9 +201,9 @@
 				AA439D442AEF9C7600D2D383 /* ContentView.swift */,
 				AA1A16802AF8D64B001B7149 /* HomeView.swift */,
 				AA4223F72AF8E62B0023E55B /* NewSessionView.swift */,
-				AAA229562B020E5D0088A7EA /* ActivityRowView.swift */,
 				AAD760312AFB64C100CC6DA9 /* SelectActivitiesView.swift */,
-				AAA229522B01DFCE0088A7EA /* ActivitySetRowView.swift */,
+				AAB9BD8D2B031ED700FFD585 /* SessionView.swift */,
+				AAB9BD8C2B031EB000FFD585 /* Row */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -348,9 +365,12 @@
 				AAC981032AFDD14D00816BE9 /* Activity+extension.swift in Sources */,
 				AAC981012AFDD14300816BE9 /* Exercise+extension.swift in Sources */,
 				AAA229532B01DFCE0088A7EA /* ActivitySetRowView.swift in Sources */,
+				AAB9BD902B03474E00FFD585 /* NumberFormatter+extension.swift in Sources */,
 				AA439D4C2AEF9C7800D2D383 /* Persistence.swift in Sources */,
+				AAB9BD8E2B031ED700FFD585 /* SessionView.swift in Sources */,
 				AA439D452AEF9C7600D2D383 /* ContentView.swift in Sources */,
 				AAD760322AFB64C100CC6DA9 /* SelectActivitiesView.swift in Sources */,
+				AAB9BD922B03505A00FFD585 /* HomeSessionRowView.swift in Sources */,
 				AA3F47A52AFE55C400E55B9D /* Binding+extension.swift in Sources */,
 				AA3F47A32AFE1EB100E55B9D /* ActivitySet+extension.swift in Sources */,
 				AA439D4F2AEF9C7800D2D383 /* Workout_Tracker.xcdatamodeld in Sources */,

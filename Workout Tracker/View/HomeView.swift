@@ -20,13 +20,14 @@ struct HomeView: View {
                 List {
                     Section {
                         NavigationLink("Start A New Session", destination: NewSessionView())
-                            .buttonStyle(.borderedProminent)
                     }
                     Section("Past Sessions") {
                         ForEach(sessions) { session in
-                            VStack(alignment: .leading) {
-                                Text(session.displayDate)
-                                Text(session.displayName)
+                            
+                            NavigationLink {
+                                SessionView(session: session)
+                            } label: {
+                                HomeSessionRowView(name: session.displayName, date: session.displayDate)
                             }
                         }
                     }

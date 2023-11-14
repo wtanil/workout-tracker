@@ -20,48 +20,29 @@ struct NewSessionView: View {
     @State private var showingSelectActivityView = false
     
     var body: some View {
-        VStack {
-            Form {
-                Section() {
-                    TextField("Name", text: $name)
-                    DatePicker("Date", selection: $date, displayedComponents: [.date, .hourAndMinute])
-                    TextField("Notes", text: $note)
-                }
-                Section {
-                    Button(action: {
-                        self.showingSelectActivityView.toggle()
-                    }, label: {
-                        Text("Add a new exercise")
-                    })
-                }
-                
-                if !activities.isEmpty {
-                    ForEach(activities) { activity in
-                        Section(header: Text(activity.displayExerciseName)) {
-                            VStack(alignment: .center) {
-                                HStack {
-                                    Button(action: {
-                                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, type: "type", unit: "kg")
-                                        var setAsArray = activity.computedActivitySets
-                                        setAsArray.append(newSet)
-                                        activity.computedActivitySets = setAsArray
-                                    }, label: {
-                                        Text(Image(systemName: "plus")) + Text(" Add set")
-                                    })
-                                    Spacer()
-                                    Button(role: .destructive, action: {
-                                        let indexToDelete = activities.firstIndex(of: activity)
-                                        activities.remove(at: indexToDelete!)
-                                    }, label: {
-                                        Image(systemName: "trash")
-                                    })
-                                }
-                                
-                                ActivityRowView(activity: activity)
+        Form {
+            Section() {
+                TextField("Name", text: $name)
+                DatePicker("Date", selection: $date, displayedComponents: [.date, .hourAndMinute])
+                TextField("Notes", text: $note)
+            }
+            Section {
+                showingSelectActivityButton
+            }
+            
+            if !activities.isEmpty {
+                ForEach(activities) { activity in
+                    Section(activity.displayExerciseName) {
+                        VStack(alignment: .center) {
+                            HStack {
+                                getNewActivitySetButton(activity: activity)
+                                Spacer()
+                                getDeleteActivityButton(activity: activity)
                             }
-                            .buttonStyle(.borderless)
+                            
+                            ActivityRowView(activity: activity)
                         }
-                        
+                        .buttonStyle(.borderless)
                     }
                 }
             }
@@ -76,6 +57,34 @@ struct NewSessionView: View {
             SelectActivitiesView(activities: $activities)
         }
         
+    }
+    
+    private var showingSelectActivityButton: some View {
+        Button(action: {
+            self.showingSelectActivityView.toggle()
+        }, label: {
+            Text("Add a new exercise")
+        })
+    }
+    
+    private func getNewActivitySetButton(activity: Activity) -> some View {
+        Button(action: {
+            let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, type: "type", unit: "kg")
+            var setAsArray = activity.computedActivitySets
+            setAsArray.append(newSet)
+            activity.computedActivitySets = setAsArray
+        }, label: {
+            Text(Image(systemName: "plus")) + Text(" Add set")
+        })
+    }
+    
+    private func getDeleteActivityButton(activity: Activity) -> some View {
+        Button(role: .destructive, action: {
+            let indexToDelete = activities.firstIndex(of: activity)
+            activities.remove(at: indexToDelete!)
+        }, label: {
+            Image(systemName: "trash")
+        })
     }
     
     private var navigationBarTrailingItem: some View {

@@ -60,10 +60,13 @@ struct ActivitySetRowView: View {
                 .toggleStyle(.button)
 //                .tint(.blue)
                 
-                Toggle("F", isOn: Binding<Bool>(
+                Toggle(isOn: Binding<Bool>(
                     get: { activitySet.isFailure },
                     set: { _ in activitySet.isFailure.toggle() }
-                ))
+                )) {
+                    Text("F")
+                        .bold()
+                }
                 .toggleStyle(.button)
 //                .tint(.blue)
             }

@@ -37,6 +37,10 @@ extension Session {
         name ?? "Unknown name"
     }
     
+    var displayNote: String {
+        note ?? "Unknown note"
+    }
+    
     var displayDate: String {
         formattedDate(for: date)
     }
@@ -59,7 +63,7 @@ extension Session {
             return [Activity]()
         }
         let set = activities as! Set<Activity>
-        let array: [Activity] = Array(set)
+        let array: [Activity] = Array(set).sorted { $0.order < $1.order }
         return array
     }
     

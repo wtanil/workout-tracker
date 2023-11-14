@@ -33,6 +33,10 @@ extension ActivitySet {
         unit ?? "-"
     }
     
+    var displayValue: String {
+        NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: value)) ?? "-"
+    }
+    
     func setUnit(to newValue: String) {
         self.unit = newValue
         self.objectWillChange.send()

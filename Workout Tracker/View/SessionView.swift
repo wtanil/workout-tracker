@@ -1,0 +1,65 @@
+//
+//  SessionView.swift
+//  Workout Tracker
+//
+//  Created by William Suryadi Tanil on 14/11/23.
+//
+
+import SwiftUI
+
+struct SessionView: View {
+    
+    var session: Session
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            
+            Text("\(session.displayDate)")
+                .font(.title3)
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+            Text("\(session.displayNote)")
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+            
+            List(session.activitiesAsArray) { activity in
+                Section(activity.displayExerciseName) {
+                    if activity.displayNote != "" {
+                        Text(activity.displayNote)
+                            .font(.caption)
+                    }
+                    ForEach(activity.activitySetsAsArray) {
+                        activitySet in
+                        HStack {
+                            Text("\(activitySet.repAsInt)")
+                            Text("x")
+                            Text("\(activitySet.displayValue)")
+                            Text(activitySet.displayUnit)
+                            if activitySet.isBodyWeight {
+                                Image(systemName: "figure.strengthtraining.functional")
+                            }
+                            if activitySet.isFailure {
+                                Text("F")
+                                    .bold()
+                            }
+                        }
+                        .padding(.leading, 16)
+                    }
+                }
+            }
+            .listStyle(.sidebar)
+            
+        }
+        .navigationTitle(session.displayName)
+        
+    }
+}
+
+struct SessionView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        
+        let context = PersistenceController.preview.container.viewContext
+        SessionView(session: Session(context: context))
+            .preferredColorScheme(.dark)
+            .environment(\.managedObjectContext, context)
+    }
+}
