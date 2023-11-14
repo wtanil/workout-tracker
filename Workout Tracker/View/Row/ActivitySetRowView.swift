@@ -56,7 +56,8 @@ struct ActivitySetRowView: View {
                 Toggle(isOn: Binding<Bool>(
                     get: { activitySet.isBodyWeight },
                     set: { _ in activitySet.isBodyWeight.toggle() }
-                )) { Image(systemName: "figure.strengthtraining.functional") }
+                )) {
+                    Image(systemName: "figure.strengthtraining.functional") }
                 .toggleStyle(.button)
 //                .tint(.blue)
                 
@@ -64,8 +65,7 @@ struct ActivitySetRowView: View {
                     get: { activitySet.isFailure },
                     set: { _ in activitySet.isFailure.toggle() }
                 )) {
-                    Text("F")
-                        .bold()
+                    Image(systemName: "flame")
                 }
                 .toggleStyle(.button)
 //                .tint(.blue)

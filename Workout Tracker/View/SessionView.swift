@@ -29,19 +29,23 @@ struct SessionView: View {
                     ForEach(activity.activitySetsAsArray) {
                         activitySet in
                         HStack {
+                            Image(systemName: "circle.fill")
+                                .imageScale(.small)
+                                .foregroundColor(.green)
                             Text("\(activitySet.repAsInt)")
                             Text("x")
                             Text("\(activitySet.displayValue)")
                             Text(activitySet.displayUnit)
                             if activitySet.isBodyWeight {
                                 Image(systemName: "figure.strengthtraining.functional")
+                                    .foregroundColor(.blue)
                             }
                             if activitySet.isFailure {
-                                Text("F")
-                                    .bold()
+                                Image(systemName: "flame.fill")
+                                    .foregroundColor(.blue)
                             }
                         }
-                        .padding(.leading, 16)
+//                        .padding(.leading, 16)
                     }
                 }
             }
