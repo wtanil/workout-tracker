@@ -14,7 +14,10 @@ struct SelectActivitiesView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     // shorts idea: (on preview canvas) why entity not found when xcdatamodel changed
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)], predicate: nil) private var exercises: FetchedResults<Exercise>
+//    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)], predicate: nil) private var exercises: FetchedResults<Exercise>
+    // shorts idea: sectionedFetchRequest
+    @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayTarget, sortDescriptors: [SortDescriptor(\.target), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
+    
     @Binding var activities: [Activity]
     // shorts idea: using dict and uuid to keep track
     @State private var dict = [UUID: Activity]() // exercise ID: new activity
@@ -25,29 +28,27 @@ struct SelectActivitiesView: View {
             Form {
                 Section {
                     TextField("Search", text: $searchText)
-                        .onChange(of: searchText) { newValue in
-                            if newValue == "" {
-                                exercises.nsPredicate = nil
-                            } else {
-                                exercises.nsPredicate = NSPredicate(format: "name CONTAINS[cd] %@", newValue)
-                            }
-                        }
                 }
                 
                 // shorts idea: fallback is good
-                if exercises.isEmpty {
-                    // add new exercise
-                    Text("There is no exercise")
+                if exerciseSections.isEmpty {
+                    // TODO: add new exercise
+                    Text("There is no exercise \(exerciseSections.count)")
                 }
                 else {
-                    ForEach(exercises) { exercise in
-                        getListRow(exercise: exercise)
+                    ForEach(exerciseSections) { section in
+                        Section(section.id) {
+                            ForEach(section.filter {
+                                searchText == "" ? true : $0.displayName.lowercased().contains(searchText.lowercased()) }) { exercise in
+                                getListRow(exercise: exercise)
+                            }
+                        }
                     }
+                     
                 }
             }
         }
         .navigationTitle("Select exercises")
-//        .searchable(text: $searchText)
     }
     
     private func getListRow(exercise: Exercise) -> some View {

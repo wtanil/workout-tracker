@@ -24,6 +24,8 @@ extension Exercise {
         category ?? "-"
     }
     
+    // needed to make SectionedFetchRequest work
+    @objc
     var displayTarget: String {
         target ?? "-"
     }
