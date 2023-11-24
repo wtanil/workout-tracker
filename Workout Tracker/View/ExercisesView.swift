@@ -27,13 +27,19 @@ struct ExercisesView: View {
                   Section(section.id) {
                      ForEach(section.filter {
                         isIncluded($0.displayName) }) { exercise in
-                           Text(exercise.displayName)
+                           
+                           NavigationLink {
+                              ShowExerciseView(exercise: exercise)
+                           } label: {
+                              Text(exercise.displayName)
+                           }
+
                         }
                   }
                }
             }
          }
-         .navigationTitle("Home")
+         .navigationTitle("Exercises")
       }
    }
    
@@ -49,5 +55,6 @@ struct ExercisesView: View {
 struct ExercisesView_Previews: PreviewProvider {
    static var previews: some View {
       ExercisesView()
+         .preferredColorScheme(.dark)
    }
 }

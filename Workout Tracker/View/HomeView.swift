@@ -32,7 +32,7 @@ struct HomeView: View {
                         }
                     }
                 }
-                .listStyle(GroupedListStyle())
+                .listStyle(.plain)
             }
             .navigationTitle("Home")
         }

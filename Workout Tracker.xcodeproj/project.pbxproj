@@ -33,6 +33,7 @@
 		AAD760402AFB6E6700CC6DA9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7603F2AFB6E6700CC6DA9 /* Category.swift */; };
 		AAD760422AFB73B400CC6DA9 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD760412AFB73B400CC6DA9 /* Target.swift */; };
 		AAFCD2942B107A480092BC97 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCD2932B107A480092BC97 /* ExercisesView.swift */; };
+		AAFCD2962B1082980092BC97 /* ShowExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		AAD7603F2AFB6E6700CC6DA9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		AAD760412AFB73B400CC6DA9 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		AAFCD2932B107A480092BC97 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
+		AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowExerciseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				AA439D442AEF9C7600D2D383 /* ContentView.swift */,
 				AA1A16802AF8D64B001B7149 /* HomeView.swift */,
 				AAFCD2932B107A480092BC97 /* ExercisesView.swift */,
+				AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */,
 				AA4223F72AF8E62B0023E55B /* NewSessionView.swift */,
 				AAD760312AFB64C100CC6DA9 /* SelectActivitiesView.swift */,
 				AAB9BD8D2B031ED700FFD585 /* SessionView.swift */,
@@ -365,6 +368,7 @@
 				AAA229572B020E5D0088A7EA /* ActivityRowView.swift in Sources */,
 				AAC980FF2AFDD13900816BE9 /* Session+extension.swift in Sources */,
 				AA4223F82AF8E62B0023E55B /* NewSessionView.swift in Sources */,
+				AAFCD2962B1082980092BC97 /* ShowExerciseView.swift in Sources */,
 				AAC981032AFDD14D00816BE9 /* Activity+extension.swift in Sources */,
 				AAC981012AFDD14300816BE9 /* Exercise+extension.swift in Sources */,
 				AAA229532B01DFCE0088A7EA /* ActivitySetRowView.swift in Sources */,
