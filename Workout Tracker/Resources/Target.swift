@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum Target: String, CaseIterable {
+enum Target: String, CaseIterable, Identifiable {
     case core = "Core"
     case shoulders = "Shoulders"
     case chest = "Chest"
@@ -17,6 +17,7 @@ enum Target: String, CaseIterable {
     case cardio = "Cardio"
     case other = "Other"
     
+   var id: Self { self }
 }
 
 enum ActivityUnit: String, CaseIterable, Identifiable {

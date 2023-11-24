@@ -13,7 +13,9 @@ struct ExercisesView: View {
    @Environment(\.managedObjectContext) var managedObjectContext
    
    @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayTarget, sortDescriptors: [SortDescriptor(\.target), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
+   
    @State private var searchText = ""
+   @State private var showingEditExerciseView = false
    
    var body: some View {
       NavigationView {
@@ -40,7 +42,24 @@ struct ExercisesView: View {
             }
          }
          .navigationTitle("Exercises")
+         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+               navigationBarTrailingItem
+            }
+         }
+         .sheet(isPresented: $showingEditExerciseView) {
+            EditExerciseView()
+         }
       }
+   }
+   
+   private var navigationBarTrailingItem: some View {
+      Button(action: {
+         self.showingEditExerciseView.toggle()
+         
+      }, label: {
+         Image(systemName: "plus")
+      })
    }
    
    private func isIncluded(_ string: String) -> Bool {

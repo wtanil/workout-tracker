@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: String, CaseIterable {
+enum Category: String, CaseIterable, Identifiable {
     case barbell = "Barbell"
     case dumbbell = "Dumbbell"
     case machine = "Machine"
@@ -15,4 +15,6 @@ enum Category: String, CaseIterable {
     case duration = "Duration"
     case cardio = "Cardio"
     case other = "Other"
+   
+   var id: Self { self }
 }

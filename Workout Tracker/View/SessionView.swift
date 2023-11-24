@@ -60,7 +60,6 @@ struct SessionView: View {
 struct SessionView_Previews: PreviewProvider {
     static var previews: some View {
         
-        
         let context = PersistenceController.preview.container.viewContext
         SessionView(session: Session(context: context))
             .preferredColorScheme(.dark)
