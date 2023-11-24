@@ -16,6 +16,11 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
+            ExercisesView()
+                .tabItem {
+                    Image(systemName: "figure.arms.open")
+                    Text("Exercises")
+                }
             Text("Setting Placeholder")
                 .tabItem {
                     Image(systemName: "gear")
