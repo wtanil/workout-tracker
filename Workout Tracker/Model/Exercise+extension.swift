@@ -9,64 +9,80 @@ import Foundation
 import CoreData
 
 extension Exercise {
-    public override func awakeFromInsert() {
-        super.awakeFromInsert()
-        
-    }
+   public override func awakeFromInsert() {
+      super.awakeFromInsert()
+      
+   }
 }
 
 extension Exercise {
-    var displayName: String {
-        name ?? "Unknown Name"
-    }
-    
-    var displayCategory: String {
-        category ?? "-"
-    }
-    
-    // needed to make SectionedFetchRequest work
-    @objc
-    var displayTarget: String {
-        target ?? "-"
-    }
-    
-    var displayLink: String {
-        link ?? ""
-    }
-    
-    var displayNote: String {
-        note ?? ""
-    }
+   
+   var displayName: String { name ?? "Unknown Name" }
+   
+   var displayLink: String { link ?? "" }
+   
+   var displayNote: String { note ?? "" }
+   
+   var displayCategory: String { category?.name ?? "-" }
+   
+   var displayEquipment: String { equipment?.name ?? "-" }
+   
+   var displayForce: String { force?.name ?? "-" }
+   
+   // instructions
+   var instructionsAsArray: [String] {
+      let data = Data(instructions!.utf8)
+      return (try? JSONDecoder().decode([String].self, from: data)) ?? [String]()
+   }
+   
+   var computedInstructions: [String] {
+      get {
+         instructionsAsArray
+      }
+      set {
+         guard let data = try? JSONEncoder().encode(newValue), let string = String(data: data, encoding: .utf8) else {
+            instructions = ""
+            return
+         }
+         instructions = string
+      }
+   }
+   
+   var displayLevel: String { level?.name ?? "-" }
+   
+   var displayMechanic: String { mechanic?.name ?? "-" }
+   
+   var displayPrimaryMuscle: String { primaryMuscle?.name ?? "-" }
+   
 }
 
 extension Exercise {
-    static func make(in context: NSManagedObjectContext,
-                     name: String,
-                     category: String,
-                     target: String,
-                     link: String,
-                     note: String
-                     ) -> Exercise {
-//        let entityDescription = NSEntityDescription.entity(forEntityName: "Exercise", in: context)
-//        let exercise = Exercise(entity: entityDescription!, insertInto: context)
-        let exercise = Exercise(context: context)
-        exercise.id = UUID()
-        exercise.category = category
-        exercise.link = link
-        exercise.name = name
-        exercise.note = note
-        exercise.target = target
-        
-        return exercise
-    }
+   
+   static func make(in context: NSManagedObjectContext,
+                    name: String,
+                    link: String,
+                    note: String,
+                    instructions: [String],
+                    category: Category,
+                    equipment: Equipment,
+                    force: Force,
+                    level: Level,
+                    mechanic: Mechanic,
+                    primaryMuscle: Muscle
+   ) -> Exercise {
+      let exercise = Exercise(context: context)
+      exercise.id = UUID()
+      exercise.name = name
+      exercise.link = link
+      exercise.note = note
+      exercise.computedInstructions = instructions
+      exercise.category = category
+      exercise.equipment = equipment
+      exercise.force = force
+      exercise.level = level
+      exercise.mechanic = mechanic
+      exercise.primaryMuscle = primaryMuscle
+      
+      return exercise
+   }
 }
-
-/*
- category: String
- id: UUID
- link: String
- name: String
- note: String
- target: String
- activities
- */

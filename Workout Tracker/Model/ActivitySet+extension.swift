@@ -23,15 +23,9 @@ extension ActivitySet {
 
 extension ActivitySet {
     
-    var repAsInt: Int {
-        Int(rep)
-    }
-    var displayType: String {
-        type ?? "-"
-    }
-    var displayUnit: String {
-        unit ?? "-"
-    }
+    var repAsInt: Int { Int(rep) }
+   
+    var displayUnit: String { unit ?? "-" }
     
     var displayValue: String {
         NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: value)) ?? "-"
@@ -60,7 +54,6 @@ extension ActivitySet {
     static func make(in context: NSManagedObjectContext,
                      rep: Int,
                      value: Double,
-                     type: String,
                      unit: String
     ) -> ActivitySet {
         //        let entityDescription = NSEntityDescription.entity(forEntityName: "Set", in: context)
@@ -68,7 +61,6 @@ extension ActivitySet {
         let activitySet = ActivitySet(context: context)
         activitySet.rep = Int32(rep)
         activitySet.value = value
-        activitySet.type = type
         activitySet.unit = unit
         
         return activitySet

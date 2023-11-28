@@ -25,9 +25,7 @@ extension Activity {
         return exercise.displayName
     }
     
-    var displayNote: String {
-        note ?? "..."
-    }
+    var displayNote: String { note ?? "" }
     
     var activitySetsAsArray: [ActivitySet] {
         guard let activitySets = sets else {

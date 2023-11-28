@@ -95,14 +95,15 @@ extension PersistenceController {
         // Exercises
         var exercises = [Exercise]()
         for index in 0 ..< 10 {
-            let newExercise = Exercise.make(
-                in: viewContext,
-                name: "Exercise \(index)",
-                category: Category.allCases[index % 7].rawValue,
-                target: Target.allCases[index % 9].rawValue,
-                link: "Link Link \(index)",
-                note: "Note Note \(index)")
-            exercises.append(newExercise)
+           // TODO: fIX THIS
+//            let newExercise = Exercise.make(
+//                in: viewContext,
+//                name: "Exercise \(index)",
+//                category: Category.allCases[index % 7].rawValue,
+//                target: Target.allCases[index % 9].rawValue,
+//                link: "Link Link \(index)",
+//                note: "Note Note \(index)")
+//            exercises.append(newExercise)
         }
         // Session Activities Sets
         // new Session
@@ -127,7 +128,6 @@ extension PersistenceController {
             let newActivitySet = ActivitySet.make(in: viewContext,
                                   rep: Int.random(in: 5 ... 10),
                                   value: Double(Int.random(in: 50 ... 100)),
-                                  type: "type \(index)",
                                   unit: unit)
             newActivitySet.activity = activities[index % 5]
             newActivitySet.isFailure = Bool.random()
@@ -151,3 +151,4 @@ extension PersistenceController {
         return result
     }()
 }
+

@@ -13,8 +13,10 @@ struct EditExerciseView: View {
    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
    
    @State private var name: String = ""
-   @State private var category: Category = .other
-   @State private var target: Target = .other
+   // TODO: FIX this
+//   @State private var category: Category = .other
+   // TODO: FIX this
+//   @State private var target: Target = .other
    @State private var link: String = ""
    @State private var note: String = ""
    
@@ -28,16 +30,18 @@ struct EditExerciseView: View {
              }
              
              Section {
-                Picker("Category", selection: $category) {
-                   ForEach(Category.allCases) { category in
-                      Text(category.rawValue)
-                   }
-                }
-                Picker("Target", selection: $target) {
-                   ForEach(Target.allCases) { target in
-                      Text(target.rawValue)
-                   }
-                }
+                // TODO: FIX this
+//                Picker("Category", selection: $category) {
+//                   ForEach(Category.allCases) { category in
+//                      Text(category.rawValue)
+//                   }
+//                }
+                // TODO: FIX this
+//                Picker("Target", selection: $target) {
+//                   ForEach(Target.allCases) { target in
+//                      Text(target.rawValue)
+//                   }
+//                }
              }
           }
           .navigationTitle("New Exercise")
@@ -51,7 +55,8 @@ struct EditExerciseView: View {
    
    private var navigationBarTrailingItem: some View {
       Button(action: {
-         let newExercise = Exercise.make(in: managedObjectContext, name: name, category: category.rawValue, target: target.rawValue, link: link, note: note)
+         // TODO: FIX this
+//         let newExercise = Exercise.make(in: managedObjectContext, name: name, category: category.rawValue, target: target.rawValue, link: link, note: note)
          
          do {
             try managedObjectContext.save()

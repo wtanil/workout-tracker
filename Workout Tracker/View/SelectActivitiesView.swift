@@ -16,7 +16,7 @@ struct SelectActivitiesView: View {
    // shorts idea: (on preview canvas) why entity not found when xcdatamodel changed
    //    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)], predicate: nil) private var exercises: FetchedResults<Exercise>
    // shorts idea: sectionedFetchRequest
-   @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayTarget, sortDescriptors: [SortDescriptor(\.target), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
+   @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayPrimaryMuscle, sortDescriptors: [SortDescriptor(\.displayPrimaryMuscle), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
    
    @Binding var activities: [Activity]
    // shorts idea: using dict and uuid to keep track

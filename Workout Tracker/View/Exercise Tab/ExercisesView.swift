@@ -12,7 +12,7 @@ struct ExercisesView: View {
    
    @Environment(\.managedObjectContext) var managedObjectContext
    
-   @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayTarget, sortDescriptors: [SortDescriptor(\.target), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
+   @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayPrimaryMuscle, sortDescriptors: [SortDescriptor(\.displayPrimaryMuscle), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
    
    @State private var searchText = ""
    @State private var showingEditExerciseView = false

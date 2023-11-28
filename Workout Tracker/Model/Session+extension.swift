@@ -33,25 +33,15 @@ extension Session {
 }
 
 extension Session {
-    var displayName: String {
-        name ?? "Unknown name"
-    }
+    var displayName: String { name ?? "-" }
     
-    var displayNote: String {
-        note ?? "Unknown note"
-    }
+    var displayNote: String { note ?? "" }
     
-    var displayDate: String {
-        formattedDate(for: date)
-    }
+    var displayDate: String { formattedDate(for: date) }
     
-    var displayCreateDate: String {
-        formattedDate(for: createDate)
-    }
+    var displayCreateDate: String { formattedDate(for: createDate) }
     
-    var displayUpdateDate: String {
-        formattedDate(for: updateDate)
-    }
+    var displayUpdateDate: String { formattedDate(for: updateDate) }
     
     private func formattedDate(for date: Date?) -> String {
         guard let date = date else { return "Unknown date" }
