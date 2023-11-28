@@ -37,7 +37,7 @@
         <relationship name="force" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Force" inverseName="exercises" inverseEntity="Force"/>
         <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="exercises" inverseEntity="Level"/>
         <relationship name="mechanic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Mechanic" inverseName="exercises" inverseEntity="Mechanic"/>
-        <relationship name="primaryMuscle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Muscle" inverseName="exercises" inverseEntity="Muscle"/>
+        <relationship name="muscle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Muscle" inverseName="exercises" inverseEntity="Muscle"/>
     </entity>
     <entity name="Force" representedClassName="Force" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -53,7 +53,7 @@
     </entity>
     <entity name="Muscle" representedClassName="Muscle" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="primaryMuscle" inverseEntity="Exercise"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscle" inverseEntity="Exercise"/>
     </entity>
     <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

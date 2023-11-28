@@ -9,7 +9,7 @@ import CoreData
 
 extension PersistenceController {
    func initializeCategories(in context: NSManagedObjectContext) -> [String: Category] {
-      var categories = ["powerlifting",
+      let categories = ["powerlifting",
                         "strength",
                         "stretching",
                         "cardio",
@@ -29,7 +29,7 @@ extension PersistenceController {
    
    func initializeEquipments(in context: NSManagedObjectContext) -> [String: Equipment] {
       // possibility of NULL
-      var equipments = ["medicine ball",
+      let equipments = ["medicine ball",
                         "dumbbell",
                         "body only",
                         "bands",
@@ -53,7 +53,7 @@ extension PersistenceController {
    
    func initializeForces(in context: NSManagedObjectContext) -> [String: Force] {
       // possibility of NULL
-      var forces = ["static",
+      let forces = ["static",
                     "pull",
                     "push",
                     "other"
@@ -69,7 +69,7 @@ extension PersistenceController {
    }
    
    func initializeLevels(in context: NSManagedObjectContext) -> [String: Level] {
-      var levels = ["beginner",
+      let levels = ["beginner",
                     "intermediate",
                     "expert"
       ]
@@ -84,7 +84,7 @@ extension PersistenceController {
    
    func initializeMechanics(in context: NSManagedObjectContext) -> [String: Mechanic] {
       // possiblity of NULL
-      var mechanics = ["isolation",
+      let mechanics = ["isolation",
                        "compound",
                        "other"]
       var dict = [String: Mechanic]()
@@ -97,7 +97,7 @@ extension PersistenceController {
    }
    
    func initializeMuscles(in context: NSManagedObjectContext) -> [String: Muscle] {
-      var muscles = ["abdominals",
+      let muscles = ["abdominals",
                      "abductors",
                      "adductors",
                      "biceps",
@@ -133,7 +133,12 @@ extension PersistenceController {
       let levelDict = initializeLevels(in: context)
       let mechanicDict = initializeMechanics(in: context)
       let muscleDict = initializeMuscles(in: context)
-      
+      print(categoryDict)
+      print(equipmentDict)
+      print(forceDict)
+      print(levelDict)
+      print(mechanicDict)
+      print(muscleDict)
    }
 }
 

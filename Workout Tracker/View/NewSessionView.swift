@@ -69,7 +69,7 @@ struct NewSessionView: View {
     
     private func getNewActivitySetButton(activity: Activity) -> some View {
         Button(action: {
-            let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, type: "type", unit: "kg")
+            let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: "kg")
             var setAsArray = activity.computedActivitySets
             setAsArray.append(newSet)
             activity.computedActivitySets = setAsArray

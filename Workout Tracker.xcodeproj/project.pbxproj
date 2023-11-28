@@ -33,6 +33,7 @@
 		AAC981032AFDD14D00816BE9 /* Activity+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC981022AFDD14D00816BE9 /* Activity+extension.swift */; };
 		AAD760322AFB64C100CC6DA9 /* SelectActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD760312AFB64C100CC6DA9 /* SelectActivitiesView.swift */; };
 		AAF777212B15D57B00B2B3C1 /* PersistenceController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF777202B15D57B00B2B3C1 /* PersistenceController+extension.swift */; };
+		AAF777232B15DE2D00B2B3C1 /* Workout-Data.json in Resources */ = {isa = PBXBuildFile; fileRef = AAF777222B15DE2D00B2B3C1 /* Workout-Data.json */; };
 		AAFCD2942B107A480092BC97 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCD2932B107A480092BC97 /* ExercisesView.swift */; };
 		AAFCD2962B1082980092BC97 /* ShowExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */; };
 		AAFCD2982B1089360092BC97 /* EditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCD2972B1089360092BC97 /* EditExerciseView.swift */; };
@@ -86,6 +87,7 @@
 		AAC981022AFDD14D00816BE9 /* Activity+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+extension.swift"; sourceTree = "<group>"; };
 		AAD760312AFB64C100CC6DA9 /* SelectActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectActivitiesView.swift; sourceTree = "<group>"; };
 		AAF777202B15D57B00B2B3C1 /* PersistenceController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceController+extension.swift"; sourceTree = "<group>"; };
+		AAF777222B15DE2D00B2B3C1 /* Workout-Data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Workout-Data.json"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		AAFCD2932B107A480092BC97 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowExerciseView.swift; sourceTree = "<group>"; };
 		AAFCD2972B1089360092BC97 /* EditExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				AA439D462AEF9C7800D2D383 /* Assets.xcassets */,
 				AA8CCAC92B10C05900A972A9 /* ActivityUnit.swift */,
+				AAF777222B15DE2D00B2B3C1 /* Workout-Data.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF777232B15DE2D00B2B3C1 /* Workout-Data.json in Resources */,
 				AA439D4A2AEF9C7800D2D383 /* Preview Assets.xcassets in Resources */,
 				AA439D472AEF9C7800D2D383 /* Assets.xcassets in Resources */,
 			);

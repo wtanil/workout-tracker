@@ -52,7 +52,8 @@ extension Exercise {
    
    var displayMechanic: String { mechanic?.name ?? "-" }
    
-   var displayPrimaryMuscle: String { primaryMuscle?.name ?? "-" }
+   @objc
+   var displayMuscle: String { muscle?.name ?? "-" }
    
 }
 
@@ -68,7 +69,7 @@ extension Exercise {
                     force: Force,
                     level: Level,
                     mechanic: Mechanic,
-                    primaryMuscle: Muscle
+                    muscle: Muscle
    ) -> Exercise {
       let exercise = Exercise(context: context)
       exercise.id = UUID()
@@ -81,7 +82,7 @@ extension Exercise {
       exercise.force = force
       exercise.level = level
       exercise.mechanic = mechanic
-      exercise.primaryMuscle = primaryMuscle
+      exercise.muscle = muscle
       
       return exercise
    }
