@@ -11,14 +11,48 @@ struct EditExerciseView: View {
    
    @Environment(\.managedObjectContext) var managedObjectContext
    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+   private var persistenceController = PersistenceController.current!
    
    @State private var name: String = ""
-   // TODO: FIX this
-//   @State private var category: Category = .other
-   // TODO: FIX this
-//   @State private var target: Target = .other
    @State private var link: String = ""
    @State private var note: String = ""
+   @State private var instructions: String = ""
+   
+   private var categories: [Category]
+   @State private var category: Category
+   private var equipments: [Equipment]
+   @State private var equipment: Equipment
+   private var forces: [Force]
+   @State private var force: Force
+   private var levels: [Level]
+   @State private var level: Level
+   private var mechanics: [Mechanic]
+   @State private var mechanic: Mechanic
+   private var muscles: [Muscle]
+   @State private var muscle: Muscle
+   
+   
+   init() {
+      // Category
+      self.categories = persistenceController.fetchCategory(in: persistenceController.container.viewContext)
+      self._category = State(initialValue: categories.first!)
+      
+      self.equipments = persistenceController.fetchEquipment(in: persistenceController.container.viewContext)
+      self._equipment = State(initialValue: equipments.first!)
+      
+      self.forces = persistenceController.fetchForce(in: persistenceController.container.viewContext)
+      self._force = State(initialValue: forces.first!)
+      
+      self.levels = persistenceController.fetchLevel(in: persistenceController.container.viewContext)
+      self._level = State(initialValue: levels.first!)
+      
+      self.mechanics = persistenceController.fetchMechanic(in: persistenceController.container.viewContext)
+      self._mechanic = State(initialValue: mechanics.first!)
+      
+      self.muscles = persistenceController.fetchMuscle(in: persistenceController.container.viewContext)
+      self._muscle = State(initialValue: muscles.first!)
+   }
+   
    
     var body: some View {
        NavigationView {
@@ -27,21 +61,52 @@ struct EditExerciseView: View {
                 TextField("Name", text: $name)
                 TextField("Link", text: $link)
                 TextField("Note", text: $note)
+                TextField("Instructions", text: $instructions)
              }
              
              Section {
-                // TODO: FIX this
-//                Picker("Category", selection: $category) {
-//                   ForEach(Category.allCases) { category in
-//                      Text(category.rawValue)
-//                   }
-//                }
-                // TODO: FIX this
-//                Picker("Target", selection: $target) {
-//                   ForEach(Target.allCases) { target in
-//                      Text(target.rawValue)
-//                   }
-//                }
+                Picker("Category", selection: $category) {
+                   ForEach(categories) { object in
+                      Text(object.name?.capitalized ?? "-")
+                         .tag(object)
+                   }
+                }
+                
+                Picker("Equipment", selection: $equipment) {
+                   ForEach(equipments) { object in
+                      Text(object.name?.capitalized ?? "-")
+                         .tag(object)
+                   }
+                }
+                
+                Picker("Force", selection: $force) {
+                   ForEach(forces) { object in
+                      Text(object.name?.capitalized ?? "-")
+                         .tag(object)
+                   }
+                }
+                
+                Picker("Level", selection: $level) {
+                   ForEach(levels) { object in
+                      Text(object.name?.capitalized ?? "-")
+                         .tag(object)
+                   }
+                }
+                
+                Picker("Mechanic", selection: $mechanic) {
+                   ForEach(mechanics) { object in
+                      Text(object.name?.capitalized ?? "-")
+                         .tag(object)
+                   }
+                }
+                
+                Picker("Muscle", selection: $muscle) {
+                   ForEach(muscles) { object in
+                      Text(object.name?.capitalized ?? "-")
+                         .tag(object)
+                   }
+                }
+                
              }
           }
           .navigationTitle("New Exercise")
@@ -55,8 +120,8 @@ struct EditExerciseView: View {
    
    private var navigationBarTrailingItem: some View {
       Button(action: {
-         // TODO: FIX this
-//         let newExercise = Exercise.make(in: managedObjectContext, name: name, category: category.rawValue, target: target.rawValue, link: link, note: note)
+         
+         let newExercise = Exercise.make(in: managedObjectContext, name: name, link: link, note: note, instructions: [instructions], category: category, equipment: equipment, force: force, level: level, mechanic: mechanic, muscle: muscle)
          
          do {
             try managedObjectContext.save()

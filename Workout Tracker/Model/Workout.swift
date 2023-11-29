@@ -37,10 +37,10 @@ struct Workout: Codable {
    let name: String
    let instructions: [String]
    let category: String
-   let equipment: String // null to .other
-   let force: String // null to .other
+   let equipment: String? // null to .other
+   let force: String? // null to .other
    let level: String
-   let mechanic: String // null to .other
+   let mechanic: String? // null to .other
    let primaryMuscles: [String]
    
 //   let id: UUID = UUID() // need to remember initializing id = UUID() before inserting to core data

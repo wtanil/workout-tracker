@@ -14,8 +14,7 @@ struct ShowExerciseView: View {
    var body: some View {
       VStack {
          HStack {
-            // TODO: fIX THIS
-//            Text("Target: \(exercise.displayTarget)")
+            Text("Target: \(exercise.displayMuscle)")
             Spacer()
          }
          

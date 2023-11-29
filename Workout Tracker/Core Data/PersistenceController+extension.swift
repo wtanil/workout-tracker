@@ -125,21 +125,159 @@ extension PersistenceController {
    }
    
    
-   func initialize(for context: NSManagedObjectContext) {
+//   func initialize(in context: NSManagedObjectContext) {
+//
+//      let categoryDict = initializeCategories(in: context)
+//      let equipmentDict = initializeEquipments(in: context)
+//      let forceDict = initializeForces(in: context)
+//      let levelDict = initializeLevels(in: context)
+//      let mechanicDict = initializeMechanics(in: context)
+//      let muscleDict = initializeMuscles(in: context)
+//
+//   }
+   
+   func getFromJSON(isPreview: Bool = false) -> [Workout] {
+      var source = "Workout-Data"
+      if isPreview {
+         source = "Workout-Data-Preview"
+      }
+      guard let path = Bundle.main.path(forResource: source, ofType: "json") else {
+         fatalError("JSON file not found!")
+      }
+      // TODO: soon to be deprecated, use "let url = URL(filePath: path)"
+      let url = URL(fileURLWithPath: path)
       
+      let decoder = JSONDecoder()
+      
+      do {
+         let data = try Data(contentsOf: url)
+         let workouts = try decoder.decode([Workout].self, from: data)
+         
+         return workouts
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func getCount(for entityName: String, in context: NSManagedObjectContext) -> Int {
+      let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+      do {
+         let count = try context.count(for: fetchRequest)
+         return count
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func generateExerciseData(in context: NSManagedObjectContext, isPreview: Bool = false) -> Bool {
       let categoryDict = initializeCategories(in: context)
       let equipmentDict = initializeEquipments(in: context)
       let forceDict = initializeForces(in: context)
       let levelDict = initializeLevels(in: context)
       let mechanicDict = initializeMechanics(in: context)
       let muscleDict = initializeMuscles(in: context)
-      print(categoryDict)
-      print(equipmentDict)
-      print(forceDict)
-      print(levelDict)
-      print(mechanicDict)
-      print(muscleDict)
+      
+      let workouts = getFromJSON(isPreview: isPreview)
+      
+      for workout in workouts {
+         let category = categoryDict[workout.category]!
+         let equipment = equipmentDict[workout.equipment ?? "other"]!
+         let force = forceDict[workout.force ?? "other"]!
+         let level = levelDict[workout.level]!
+         let mechanic = mechanicDict[workout.mechanic ?? "other"]!
+         let muscle = muscleDict[workout.primaryMuscles[0]]!
+         
+         let newExercise = Exercise.make(in: context,
+                                         name: workout.name,
+                                         link: "",
+                                         note: "",
+                                         instructions: workout.instructions,
+                                         category: category,
+                                         equipment: equipment,
+                                         force: force,
+                                         level: level,
+                                         mechanic: mechanic,
+                                         muscle: muscle)
+      }
+      
+      if isPreview {
+         let newSession = Session.make(in: context, name: "Morning Session", date: Date(), note: "Note for morning session. Lorem ipsum dolor ames.")
+      }
+      
+      do {
+         try context.save()
+         return true
+      } catch {
+         // Replace this implementation with code to handle the error appropriately.
+         // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+         let nsError = error as NSError
+         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+      }
+      
+      
    }
+   
+   func fetchCategory(in context: NSManagedObjectContext) -> [Category] {
+      let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+      do {
+         let objects = try context.fetch(fetchRequest)
+         return objects
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func fetchEquipment(in context: NSManagedObjectContext) -> [Equipment] {
+      let fetchRequest: NSFetchRequest<Equipment> = Equipment.fetchRequest()
+      do {
+         let objects = try context.fetch(fetchRequest)
+         return objects
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func fetchForce(in context: NSManagedObjectContext) -> [Force] {
+      let fetchRequest: NSFetchRequest<Force> = Force.fetchRequest()
+      do {
+         let objects = try context.fetch(fetchRequest)
+         return objects
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func fetchLevel(in context: NSManagedObjectContext) -> [Level] {
+      let fetchRequest: NSFetchRequest<Level> = Level.fetchRequest()
+      do {
+         let objects = try context.fetch(fetchRequest)
+         return objects
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func fetchMechanic(in context: NSManagedObjectContext) -> [Mechanic] {
+      let fetchRequest: NSFetchRequest<Mechanic> = Mechanic.fetchRequest()
+      do {
+         let objects = try context.fetch(fetchRequest)
+         return objects
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   func fetchMuscle(in context: NSManagedObjectContext) -> [Muscle] {
+      let fetchRequest: NSFetchRequest<Muscle> = Muscle.fetchRequest()
+      do {
+         let objects = try context.fetch(fetchRequest)
+         return objects
+      } catch {
+         fatalError(error.localizedDescription)
+      }
+   }
+   
+   
 }
 
 

@@ -23,7 +23,7 @@ struct HomeView: View {
                     }
                     Section("Past Sessions") {
                         ForEach(sessions) { session in
-                            
+
                             NavigationLink {
                                 SessionView(session: session)
                             } label: {
