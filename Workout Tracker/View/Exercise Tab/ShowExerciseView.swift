@@ -14,12 +14,28 @@ struct ShowExerciseView: View {
    var body: some View {
       VStack {
          HStack {
-            Text("Target: \(exercise.displayMuscle)")
+            Text("Target muscle: \(exercise.displayMuscle)")
             Spacer()
          }
-         
          HStack {
-            Text(exercise.displayCategory)
+            Text("Category: \(exercise.displayCategory)")
+            Spacer()
+         }
+         HStack {
+            Text("Equipment: \(exercise.displayEquipment)")
+            Text("Equipment: \(exercise.equipment?.name ?? "nil")")
+            Spacer()
+         }
+         HStack {
+            Text("Force: \(exercise.displayForce)")
+            Spacer()
+         }
+         HStack {
+            Text("Level: \(exercise.displayLevel)")
+            Spacer()
+         }
+         HStack {
+            Text("Mechanic \(exercise.displayMechanic)")
             Spacer()
          }
          
