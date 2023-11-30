@@ -11,6 +11,7 @@ struct ActivitySetRowView: View {
    
    @ObservedObject var activity: Activity
    @ObservedObject var activitySet: ActivitySet
+   @Binding var activityUnit: String
    
    var body: some View {
       VStack(alignment: .leading) {
@@ -37,20 +38,24 @@ struct ActivitySetRowView: View {
             .keyboardType(.decimalPad)
             .frame(width: 48)
             
-            Picker("Unit",
-                   selection: Binding<String>(
-                     get: { activitySet.displayUnit },
-                     set: {
-                        activitySet.setUnit(to: $0)
-                     })
-            ) {
-               ForEach(ActivityUnit.allCases) { unit in
-                  Text(unit.rawValue)
-               }
+            Text(activityUnit).onChange(of: activityUnit) { newValue in
+               activitySet.setUnit(to: newValue)
             }
-            .labelsHidden()
-            .frame(width: 72)
-            .pickerStyle(.menu)
+            
+//            Picker("Unit",
+//                   selection: Binding<String>(
+//                     get: { activitySet.displayUnit },
+//                     set: {
+//                        activitySet.setUnit(to: $0)
+//                     })
+//            ) {
+//               ForEach(ActivityUnit.allCases) { unit in
+//                  Text(unit.rawValue)
+//               }
+//            }
+//            .labelsHidden()
+//            .frame(width: 72)
+//            .pickerStyle(.menu)
             
             if activitySet.isFailure {
                Image(systemName: "flame")
@@ -85,7 +90,7 @@ struct ActivitySetRowView_Previews: PreviewProvider {
    static var previews: some View {
       
       let context = PersistenceController.preview.container.viewContext
-      ActivitySetRowView(activity: Activity(context: context), activitySet: ActivitySet(context: context))
+      ActivitySetRowView(activity: Activity(context: context), activitySet: ActivitySet(context: context), activityUnit: .constant("kg"))
          .environment(\.managedObjectContext, context)
    }
 }
