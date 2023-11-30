@@ -179,6 +179,8 @@ extension PersistenceController {
       
       let workouts = getFromJSON(isPreview: isPreview)
       
+      var tempExercise = [Exercise]()
+      
       for workout in workouts {
          let category = categoryDict[workout.category]!
          let equipment = equipmentDict[workout.equipment ?? "other"]!
@@ -198,11 +200,55 @@ extension PersistenceController {
                                          level: level,
                                          mechanic: mechanic,
                                          muscle: muscle)
+         
+         if tempExercise.count < 5 {
+            tempExercise.append(newExercise)
+         }
       }
       
+      // generate preview data
       if isPreview {
-         let newSession = Session.make(in: context, name: "Morning Session", date: Date(), note: "Note for morning session. Lorem ipsum dolor ames.")
+         _ = Session.make(in: context, name: "Empty Session", date: Date(), note: "")
+         _ = Session.make(in: context, name: "Note Session", date: Date(), note: "Note for morning session. Lorem ipsum dolor ames.")
+         let someSession = Session.make(in: context, name: "Some Session", date: Date(), note: "")
+         let someEmptySession = Session.make(in: context, name: "Some Empty Session", date: Date(), note: "")
+         var activities = [Activity]()
+         
+         for index in 0 ..< tempExercise.count {
+            let newActivity = Activity.make(in: context, note: "notes")
+            if index.isMultiple(of: 2) {
+               newActivity.note = ""
+            }
+            newActivity.exercise = tempExercise[index]
+            newActivity.order = Int16(index)
+            activities.append(newActivity)
+         }
+         someEmptySession.computedActivities = activities
+         activities = [Activity]()
+         for index in 0 ..< 3 {
+            let newActivity = Activity.make(in: context, note: "notes")
+            if index.isMultiple(of: 2) {
+               newActivity.note = ""
+            }
+            newActivity.exercise = tempExercise[index]
+            newActivity.order = Int16(index)
+            activities.append(newActivity)
+            var activitySets = [ActivitySet]()
+            for j in 0 ..< 2 {
+               let newSet = ActivitySet.make(in: context, rep: 10, value: 20, unit: "kg")
+               newSet.setValue(to: 30)
+               if j == 1 {
+                  newSet.isFailure = true
+                  newSet.isBodyWeight = true
+               }
+               activitySets.append(newSet)
+            }
+            newActivity.computedActivitySets = activitySets
+            
+         }
+         someSession.computedActivities = activities
       }
+      // end of generate preview data
       
       do {
          try context.save()
