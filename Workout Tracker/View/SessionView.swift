@@ -36,6 +36,8 @@ struct SessionView: View {
                             Text("x")
                             Text("\(activitySet.displayValue)")
                             Text(activitySet.displayUnit)
+                           (Text(Image(systemName: "scalemass")) + Text(": \(activitySet.displayTotalValue)"))
+                           Text(activitySet.displayUnit)
                             if activitySet.isBodyWeight {
                                 Image(systemName: "figure.strengthtraining.functional")
                                     .foregroundColor(.blue)
@@ -62,7 +64,6 @@ struct SessionView_Previews: PreviewProvider {
         
         let context = PersistenceController.preview.container.viewContext
         SessionView(session: Session(context: context))
-            .preferredColorScheme(.dark)
             .environment(\.managedObjectContext, context)
     }
 }

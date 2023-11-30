@@ -90,7 +90,6 @@ struct SelectActivitiesView_Previews: PreviewProvider {
    static var previews: some View {
       let context = PersistenceController.preview.container.viewContext
       SelectActivitiesView(activities: .constant([Activity]()))
-         .preferredColorScheme(.dark)
          .environment(\.managedObjectContext, context)
    }
 }

@@ -17,14 +17,6 @@ struct ActivityRowView: View {
                 Divider()
                 HStack(alignment: .center) {
                     ActivitySetRowView(activity: activity, activitySet: activitySet)
-                    Spacer()
-                    Button(role: .destructive, action: {
-                        activity.remove(activitySet)
-                    }, label: {
-                        Image(systemName: "minus")
-                    })
-                    .buttonStyle(.borderless)
-                    
                 }
             }
         }

@@ -112,7 +112,6 @@ struct NewSessionView: View {
 struct NewSessionView_Previews: PreviewProvider {
     static var previews: some View {
         NewSessionView()
-            .preferredColorScheme(.dark)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

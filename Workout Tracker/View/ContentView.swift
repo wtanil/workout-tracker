@@ -39,7 +39,6 @@ struct ContentView_Previews: PreviewProvider {
       let _ = persistenceController.getCount(for: "Exercise", in: viewContext) == 0 ? persistenceController.generateExerciseData(in: viewContext, isPreview: true) : false
       
       ContentView()
-         .preferredColorScheme(.dark)
          .environment(\.managedObjectContext, viewContext)
       
    }

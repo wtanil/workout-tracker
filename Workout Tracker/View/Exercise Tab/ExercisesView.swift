@@ -74,6 +74,5 @@ struct ExercisesView: View {
 struct ExercisesView_Previews: PreviewProvider {
    static var previews: some View {
       ExercisesView()
-         .preferredColorScheme(.dark)
    }
 }

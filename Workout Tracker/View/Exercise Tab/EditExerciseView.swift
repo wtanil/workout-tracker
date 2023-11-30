@@ -143,7 +143,6 @@ struct EditExerciseView_Previews: PreviewProvider {
        
        let context = PersistenceController.preview.container.viewContext
        EditExerciseView()
-          .preferredColorScheme(.dark)
           .environment(\.managedObjectContext, context)
     }
 }
