@@ -12,9 +12,10 @@ struct SelectActivitiesView: View {
    
    // future: solution to avoid using environment (donny walsh and paul hudson methods
    @Environment(\.managedObjectContext) var managedObjectContext
+   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
    
    // shorts idea: (on preview canvas) why entity not found when xcdatamodel changed
-//       @FetchRequest(sortDescriptors: [SortDescriptor(\.name)], predicate: nil) private var exercises: FetchedResults<Exercise>
+   //       @FetchRequest(sortDescriptors: [SortDescriptor(\.name)], predicate: nil) private var exercises: FetchedResults<Exercise>
    // shorts idea: sectionedFetchRequest
    @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayMuscle, sortDescriptors: [SortDescriptor(\.muscle!.name), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
    
@@ -24,31 +25,46 @@ struct SelectActivitiesView: View {
    @State private var searchText = ""
    
    var body: some View {
-      VStack(alignment: .leading) {
-         Form {
-            Section {
-               TextField("Search", text: $searchText)
-            }
-            
-            // shorts idea: fallback is good
-            if exerciseSections.isEmpty {
-               // TODO: add new exercise
-               Text("There is no exercise")
-            }
-            else {
-               ForEach(exerciseSections) { section in
-                  Section(section.id) {
-                     ForEach(section.filter {
-                        isIncluded($0.displayName) }) { exercise in
-                           getListRow(exercise: exercise)
-                        }
-                  }
+      NavigationView {
+         VStack(alignment: .leading) {
+            Form {
+               Section {
+                  TextField("Search", text: $searchText)
                }
                
+               // shorts idea: fallback is good
+               if exerciseSections.isEmpty {
+                  // TODO: add new exercise
+                  Text("There is no exercise")
+               }
+               else {
+                  ForEach(exerciseSections) { section in
+                     Section(section.id) {
+                        ForEach(section.filter {
+                           isIncluded($0.displayName) }) { exercise in
+                              getListRow(exercise: exercise)
+                           }
+                     }
+                  }
+                  
+               }
+            }
+         }
+         .navigationTitle("Select exercises")
+         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+               navigationBarTrailingItem
             }
          }
       }
-      .navigationTitle("Select exercises")
+   }
+   
+   private var navigationBarTrailingItem: some View {
+      Button(action: {
+         presentationMode.wrappedValue.dismiss()
+      }, label: {
+         Text("Done")
+      })
    }
    
    private func isIncluded(_ string: String) -> Bool {

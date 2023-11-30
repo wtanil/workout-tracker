@@ -42,21 +42,6 @@ struct ActivitySetRowView: View {
                activitySet.setUnit(to: newValue)
             }
             
-//            Picker("Unit",
-//                   selection: Binding<String>(
-//                     get: { activitySet.displayUnit },
-//                     set: {
-//                        activitySet.setUnit(to: $0)
-//                     })
-//            ) {
-//               ForEach(ActivityUnit.allCases) { unit in
-//                  Text(unit.rawValue)
-//               }
-//            }
-//            .labelsHidden()
-//            .frame(width: 72)
-//            .pickerStyle(.menu)
-            
             if activitySet.isFailure {
                Image(systemName: "flame")
                   .foregroundColor(.red)

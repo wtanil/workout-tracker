@@ -114,6 +114,9 @@ struct EditExerciseView: View {
              ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItem
              }
+             ToolbarItem(placement: .navigationBarLeading) {
+                navigationBarLeadingItem
+             }
           }
        }
     }
@@ -121,7 +124,7 @@ struct EditExerciseView: View {
    private var navigationBarTrailingItem: some View {
       Button(action: {
          
-         let newExercise = Exercise.make(in: managedObjectContext, name: name, link: link, note: note, instructions: [instructions], category: category, equipment: equipment, force: force, level: level, mechanic: mechanic, muscle: muscle)
+         _ = Exercise.make(in: managedObjectContext, name: name, link: link, note: note, instructions: [instructions], category: category, equipment: equipment, force: force, level: level, mechanic: mechanic, muscle: muscle)
          
          do {
             try managedObjectContext.save()
@@ -134,6 +137,14 @@ struct EditExerciseView: View {
          
       }, label: {
          Text("Save")
+      })
+   }
+   
+   private var navigationBarLeadingItem: some View {
+      Button(action: {
+         presentationMode.wrappedValue.dismiss()
+      }, label: {
+         Text("Dismiss")
       })
    }
 }
