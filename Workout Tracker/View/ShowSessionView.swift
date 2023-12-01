@@ -56,7 +56,7 @@ struct ShowSessionView: View {
                      (Text(Image(systemName: "scalemass")) + Text(": \(activitySet.displayTotalValue)"))
                      Text(activitySet.displayUnit)
                      if activitySet.isBodyWeight {
-                        Image(systemName: "figure.strengthtraining.functional")
+                        Image(systemName: "person.fill")
                            .foregroundColor(.blue)
                      }
                      if activitySet.isFailure {

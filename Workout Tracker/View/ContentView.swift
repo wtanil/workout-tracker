@@ -18,15 +18,15 @@ struct ContentView: View {
             }
          ExercisesView()
             .tabItem {
-               Image(systemName: "figure.arms.open")
+               Image(systemName: "figure.walk")
                Text("Exercises")
             }
-         Text("Setting Placeholder")
-            .tabItem {
-               Image(systemName: "gear")
-               Text("Setting")
-               
-            }
+//         Text("Setting Placeholder")
+//            .tabItem {
+//               Image(systemName: "gear")
+//               Text("Setting")
+//
+//            }
       }
    }
 }

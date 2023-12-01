@@ -47,7 +47,7 @@ struct ActivitySetRowView: View {
                   .foregroundColor(.red)
             }
             if activitySet.isBodyWeight {
-               Image(systemName: "figure.strengthtraining.functional")
+               Image(systemName: "person")
                   .foregroundColor(.blue)
             }
             
