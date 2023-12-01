@@ -59,6 +59,10 @@ extension Exercise {
 
 extension Exercise {
    
+   static func delete(exercise: Exercise, in context: NSManagedObjectContext) {
+      context.delete(exercise)
+   }
+   
    static func make(in context: NSManagedObjectContext,
                     name: String,
                     link: String,

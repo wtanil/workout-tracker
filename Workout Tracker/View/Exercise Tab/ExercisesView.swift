@@ -15,7 +15,9 @@ struct ExercisesView: View {
    @SectionedFetchRequest<String, Exercise>(sectionIdentifier: \.displayMuscle, sortDescriptors: [SortDescriptor(\.muscle!.name), SortDescriptor(\.name)], predicate: nil) private var exerciseSections: SectionedFetchResults<String, Exercise>
    
    @State private var searchText = ""
-   @State private var showingEditExerciseView = false
+   @State private var showingNewExerciseView = false
+   @State private var showingDeleteAlert = false
+   @State private var exerciseToDelete: Exercise? = nil
    
    var body: some View {
       NavigationView {
@@ -35,7 +37,19 @@ struct ExercisesView: View {
                            } label: {
                               Text(exercise.displayName)
                            }
+                           .swipeActions {
+                              Button("Delete") {
+                                 self.exerciseToDelete = exercise
+                                 self.showingDeleteAlert.toggle()
+                              }
+                              .tint(.red)
+                           }
 
+                        }
+                        .confirmationDialog("Are you sure?", isPresented: $showingDeleteAlert) {
+                           Button("Delete", role: .destructive) {
+                              deleteAction()
+                           }
                         }
                   }
                }
@@ -47,7 +61,7 @@ struct ExercisesView: View {
                navigationBarTrailingItem
             }
          }
-         .sheet(isPresented: $showingEditExerciseView) {
+         .sheet(isPresented: $showingNewExerciseView) {
             NewExerciseView()
          }
       }
@@ -55,11 +69,23 @@ struct ExercisesView: View {
    
    private var navigationBarTrailingItem: some View {
       Button(action: {
-         self.showingEditExerciseView.toggle()
+         self.showingNewExerciseView.toggle()
          
       }, label: {
          Image(systemName: "plus")
       })
+   }
+   
+   private func deleteAction() {
+      Exercise.delete(exercise: exerciseToDelete!, in: managedObjectContext)
+      do {
+         try managedObjectContext.save()
+      } catch {
+         let nsError = error as NSError
+         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+      }
+      
+      self.exerciseToDelete = nil
    }
    
    private func isIncluded(_ string: String) -> Bool {
