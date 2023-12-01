@@ -210,7 +210,7 @@ extension PersistenceController {
       if isPreview {
          _ = Session.make(in: context, name: "Empty Session", date: Date(), note: "")
          _ = Session.make(in: context, name: "Note Session", date: Date(), note: "Note for morning session. Lorem ipsum dolor ames.")
-         let someSession = Session.make(in: context, name: "Some Session", date: Date(), note: "")
+         let someSession = Session.make(in: context, name: "Some Session", date: Date(), note: "Note for morning session. Lorem ipsum dolor ames.")
          let someEmptySession = Session.make(in: context, name: "Some Empty Session", date: Date(), note: "")
          var activities = [Activity]()
          

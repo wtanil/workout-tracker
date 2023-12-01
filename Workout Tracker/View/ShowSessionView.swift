@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct SessionView: View {
+struct ShowSessionView: View {
    
-   var session: Session
+   @ObservedObject var session: Session
+   
+   @State private var showingNote: Bool = false
    
    var body: some View {
       VStack(alignment: .leading, spacing: 8) {
@@ -17,12 +19,20 @@ struct SessionView: View {
          Text("\(session.displayDate)")
             .font(.title3)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-         Text("\(session.displayNote)")
+         
+         Toggle("Note", isOn: $showingNote)
+            .toggleStyle(.button)
+//            .tint(.mint)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+         
+         if showingNote {
+            Text("\(session.displayNote)")
+               .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+         }
          
          List(session.activitiesAsArray) { activity in
             Section(activity.displayExerciseName) {
-               #warning("Check why even if total value is 0, it is still showed")
+
                if activity.displayTotalValue != "-" {
                   Text("Total: \(activity.displayTotalValue)")
                }
@@ -61,7 +71,29 @@ struct SessionView: View {
          
       }
       .navigationTitle(session.displayName)
+      .toolbar {
+         ToolbarItem(placement: .navigationBarTrailing) {
+            navigationBarTrailingItem
+         }
+      }
       
+   }
+   
+   private var navigationBarTrailingItem: some View {
+      
+      NavigationLink("Edit", destination: EditSessionView(session: session))
+      
+      // to delete, start async thread, then go back
+      
+//      Menu {
+//
+//         Divider()
+//         Button("Delete", role: .destructive) {
+//            print("asdf")
+//         }
+//      } label: {
+//         Label("", systemImage: "ellipsis")
+//      }
    }
 }
 
@@ -69,7 +101,7 @@ struct SessionView_Previews: PreviewProvider {
    static var previews: some View {
       
       let context = PersistenceController.preview.container.viewContext
-      SessionView(session: Session(context: context))
+      ShowSessionView(session: Session(context: context))
          .environment(\.managedObjectContext, context)
    }
 }

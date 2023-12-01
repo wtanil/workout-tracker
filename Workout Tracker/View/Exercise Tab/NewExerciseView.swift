@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditExerciseView: View {
+struct NewExerciseView: View {
    
    @Environment(\.managedObjectContext) var managedObjectContext
    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -153,7 +153,7 @@ struct EditExerciseView_Previews: PreviewProvider {
     static var previews: some View {
        
        let context = PersistenceController.preview.container.viewContext
-       EditExerciseView()
+       NewExerciseView()
           .environment(\.managedObjectContext, context)
     }
 }

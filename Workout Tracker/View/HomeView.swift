@@ -24,7 +24,7 @@ struct HomeView: View {
                   ForEach(sessions) { session in
                      
                      NavigationLink {
-                        SessionView(session: session)
+                        ShowSessionView(session: session)
                      } label: {
                         HomeSessionRowView(name: session.displayName, date: session.displayDate)
                      }
