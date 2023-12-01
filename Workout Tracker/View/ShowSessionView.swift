@@ -20,15 +20,17 @@ struct ShowSessionView: View {
             .font(.title3)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
          
-         Toggle("Note", isOn: $showingNote)
-            .toggleStyle(.button)
-//            .tint(.mint)
-            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+         if session.displayNote != "" {
+            Toggle(showingNote ? "note \(Image(systemName: "chevron.up"))" : "note \(Image(systemName: "chevron.down"))", isOn: $showingNote)
+               .toggleStyle(.button)
+               .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+         }
          
          if showingNote {
             Text("\(session.displayNote)")
                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
          }
+            
          
          List(session.activitiesAsArray) { activity in
             Section(activity.displayExerciseName) {
