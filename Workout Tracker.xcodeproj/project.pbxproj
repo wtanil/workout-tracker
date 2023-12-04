@@ -11,6 +11,7 @@
 		AA3A82A02B1DAF96005D2C32 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A829F2B1DAF95005D2C32 /* SectionHeader.swift */; };
 		AA3A82A22B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82A12B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift */; };
 		AA3A82A42B1DB0E7005D2C32 /* ActionButtonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82A32B1DB0E7005D2C32 /* ActionButtonViewModifier.swift */; };
+		AA3A82A92B1DC9A2005D2C32 /* ShowSessionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */; };
 		AA3F479F2AFE099C00E55B9D /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */; };
 		AA3F47A32AFE1EB100E55B9D /* ActivitySet+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F47A22AFE1EB100E55B9D /* ActivitySet+extension.swift */; };
 		AA3F47A52AFE55C400E55B9D /* Binding+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F47A42AFE55C400E55B9D /* Binding+extension.swift */; };
@@ -66,6 +67,7 @@
 		AA3A829F2B1DAF95005D2C32 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		AA3A82A12B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSessionRowViewModifier.swift; sourceTree = "<group>"; };
 		AA3A82A32B1DB0E7005D2C32 /* ActionButtonViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonViewModifier.swift; sourceTree = "<group>"; };
+		AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSessionRow.swift; sourceTree = "<group>"; };
 		AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		AA3F47A22AFE1EB100E55B9D /* ActivitySet+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivitySet+extension.swift"; sourceTree = "<group>"; };
 		AA3F47A42AFE55C400E55B9D /* Binding+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+extension.swift"; sourceTree = "<group>"; };
@@ -230,7 +232,6 @@
 		AAD760302AFB5B6700CC6DA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AA3A829E2B1DAF27005D2C32 /* Custom View Modifier */,
 				AA439D442AEF9C7600D2D383 /* ContentView.swift */,
 				AA1A16802AF8D64B001B7149 /* HomeView.swift */,
 				AA4223F72AF8E62B0023E55B /* NewSessionView.swift */,
@@ -239,6 +240,7 @@
 				AAB9BD8D2B031ED700FFD585 /* ShowSessionView.swift */,
 				AAFCD2992B10893F0092BC97 /* Exercise Tab */,
 				AAB9BD8C2B031EB000FFD585 /* Row */,
+				AA3A829E2B1DAF27005D2C32 /* Custom View Modifier */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,6 +274,7 @@
 				AAFCD2932B107A480092BC97 /* ExercisesView.swift */,
 				AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */,
 				AAFCD2972B1089360092BC97 /* NewExerciseView.swift */,
+				AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */,
 			);
 			path = "Exercise Tab";
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3A82A92B1DC9A2005D2C32 /* ShowSessionRow.swift in Sources */,
 				AAA229572B020E5D0088A7EA /* ActivityRowView.swift in Sources */,
 				AAC980FF2AFDD13900816BE9 /* Session+extension.swift in Sources */,
 				AA4223F82AF8E62B0023E55B /* NewSessionView.swift in Sources */,
