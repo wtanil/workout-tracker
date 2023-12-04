@@ -16,24 +16,44 @@ struct HomeView: View {
       
       NavigationView {
          VStack(alignment: .leading) {
-            List {
-               Section {
-                  NavigationLink("Start A New Session", destination: NewSessionView())
-               }
-               Section("Past Sessions") {
-                  ForEach(sessions) { session in
-                     
-                     NavigationLink {
-                        ShowSessionView(session: session)
-                     } label: {
-                        HomeSessionRowView(name: session.displayName, date: session.displayDate)
+            
+            HStack {
+               VStack {
+                  NavigationLink {
+                     NewSessionView()
+                  } label: {
+                     HStack {
+                        Text(Image(systemName: "plus"))
+                           .foregroundColor(.white)
+                        Text("Start A New Session")
+                           .foregroundColor(.white)
                      }
                   }
+               }
+               .padding()
+               .modifier(ActionButton())
+            }
+            
+            Text("Past Session")
+               .padding(.top, 16)
+               .modifier(SectionHeader())
+            
+            List {
+               ForEach(sessions) { session in
+                  
+                  NavigationLink {
+                     ShowSessionView(session: session)
+                  } label: {
+                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount)
+                  }
+                  .padding()
+                  .modifier(HomeSessionRow())
                }
             }
             .listStyle(.plain)
          }
          .navigationTitle("Home")
+         .padding([.leading, .trailing])
       }
       
    }

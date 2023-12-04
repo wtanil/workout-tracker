@@ -65,6 +65,14 @@ extension Session {
             self.activities = NSSet(array: newValue)
         }
     }
+   
+   var activityCount: Int {
+      activities?.count ?? 0
+   }
+   
+   var displayActivityCount: String {
+      "\(activityCount)"
+   }
 }
 
 extension Session {
