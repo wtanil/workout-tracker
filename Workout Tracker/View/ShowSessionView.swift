@@ -41,7 +41,6 @@ struct ShowSessionView: View {
                
                if activity.displayNote != "" {
                   Text(activity.displayNote)
-                     .font(.caption)
                }
                ForEach(activity.activitySetsAsArray) {
                   activitySet in
@@ -65,7 +64,6 @@ struct ShowSessionView: View {
                      }
                      
                   }
-                  //                        .padding(.leading, 16)
                }
             }
          }

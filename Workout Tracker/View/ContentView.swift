@@ -9,6 +9,15 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+   
+   private let appearance: UITabBarAppearance = UITabBarAppearance()
+   
+   init() {
+//      appearance.backgroundColor = UIColor(red: 73, green: 4, blue: 12, alpha: 0.5)
+      UITabBar.appearance().scrollEdgeAppearance = appearance
+      
+   }
+   
    var body: some View {
       TabView {
          HomeView()
@@ -16,6 +25,7 @@ struct ContentView: View {
                Image(systemName: "house")
                Text("Home")
             }
+            
          ExercisesView()
             .tabItem {
                Image(systemName: "figure.walk")
