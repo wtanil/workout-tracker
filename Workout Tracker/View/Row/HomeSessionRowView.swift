@@ -11,17 +11,18 @@ struct HomeSessionRowView: View {
    var name: String
    var date: String
    var activityCount: String
+   var totalValue: String
+   
    var body: some View {
       VStack(alignment: .leading) {
          Text(name)
-//            .foregroundColor(.white)
+            .font(.title3)
          
          Text(date)
-//            .foregroundColor(.white)
             .font(.caption)
          
          Text("Exercises: \(activityCount)")
-//            .foregroundColor(.white)
+         Text("Total: \(totalValue)")
          
       }
    }
@@ -29,6 +30,6 @@ struct HomeSessionRowView: View {
 
 struct HomeSessionRowView_Previews: PreviewProvider {
    static var previews: some View {
-      HomeSessionRowView(name: "name", date: "date", activityCount: "7")
+      HomeSessionRowView(name: "name", date: "date", activityCount: "7", totalValue: "100 kg")
    }
 }

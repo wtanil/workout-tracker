@@ -24,10 +24,9 @@ struct HomeView: View {
                   } label: {
                      HStack {
                         Text(Image(systemName: "plus"))
-                           .foregroundColor(.white)
                         Text("Start A New Session")
-                           .foregroundColor(.white)
                      }
+                     .foregroundColor(.white)
                   }
                }
                .padding()
@@ -44,7 +43,7 @@ struct HomeView: View {
                   NavigationLink {
                      ShowSessionView(session: session)
                   } label: {
-                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount)
+                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValue)
                   }
                   .padding()
                   .modifier(HomeSessionRow())

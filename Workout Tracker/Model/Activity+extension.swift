@@ -25,17 +25,6 @@ extension Activity {
       return exercise.displayName
    }
    
-   var displayTotalValue: String {
-      let activitySets = activitySetsAsArray
-      if activitySets.isEmpty {
-         return "-"
-      }
-      let totalValue: Double = activitySets.reduce(0) { $0 + $1.totalValue }
-      let unit = activitySetsAsArray[0].displayUnit
-      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: totalValue)) ?? "-"
-      return "\(string) \(unit)"
-   }
-   
    var displayNote: String { note ?? "" }
    
    var activitySetsAsArray: [ActivitySet] {
@@ -45,6 +34,39 @@ extension Activity {
       let set = activitySets as! Set<ActivitySet>
       let array = Array(set).sorted { $0.createDate! < $1.createDate! }
       return array
+   }
+   
+   var activitySetCount: Int {
+      sets?.count ?? 0
+   }
+   
+   var totalValue: Double {
+      let activitySets = activitySetsAsArray
+      if activitySets.isEmpty {
+         return 0
+      }
+      let totalValue: Double = activitySets.reduce(0) { $0 + $1.totalValue }
+      return totalValue
+   }
+   
+   var displayActivitySetUnit: String {
+      if activitySetCount == 0 {
+         return "-"
+      }
+      let unit = activitySetsAsArray[0].displayUnit
+      return unit
+   }
+   
+   var displayTotalValue: String {
+      
+      let temp: Double = totalValue
+      let unit = displayActivitySetUnit
+      
+      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: temp)) ?? "-"
+      if unit == "-" {
+         return "\(string)"
+      }
+      return "\(string) \(unit)"
    }
    
    var bestActivitySet: ActivitySet? {
