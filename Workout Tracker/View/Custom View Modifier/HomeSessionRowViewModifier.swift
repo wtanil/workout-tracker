@@ -10,10 +10,11 @@ import SwiftUI
 struct HomeSessionRow: ViewModifier {
    func body(content: Content) -> some View {
       content
+         .background(Color.red.opacity(0.1))
          .cornerRadius(16, antialiased: true)
          .overlay(
             RoundedRectangle(cornerRadius: 16)
-               .inset(by: 2)
+               .inset(by: 0)
                .strokeBorder(.red, lineWidth: 2, antialiased: true)
          )
          .listRowSeparator(.hidden)

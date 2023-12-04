@@ -16,7 +16,8 @@ struct HomeSessionRowView: View {
    var body: some View {
       VStack(alignment: .leading) {
          Text(name)
-            .font(.title3)
+            .font(.title3.weight(.bold))
+            .foregroundColor(Color.accentColor)
          
          Text(date)
             .font(.caption)

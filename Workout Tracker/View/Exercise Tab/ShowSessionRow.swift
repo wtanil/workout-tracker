@@ -57,8 +57,10 @@ struct ShowSessionRow: View {
             
          } label: {
             Text(activity.displayExerciseName)
+               
          }
          .padding()
+         .background(Color.red.opacity(0.1))
          .cornerRadius(16, antialiased: true)
          .overlay(
             RoundedRectangle(cornerRadius: 16)

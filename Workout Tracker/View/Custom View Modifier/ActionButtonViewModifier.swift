@@ -10,7 +10,7 @@ import SwiftUI
 struct ActionButton: ViewModifier {
    func body(content: Content) -> some View {
       content
-         .background(.red)
+         .background(.red.opacity(0.25))
          .cornerRadius(16)
    }
 }
