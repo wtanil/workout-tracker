@@ -18,10 +18,12 @@ struct ShowSessionRow: View {
          DisclosureGroup(isExpanded: $shouldExpand) {
             
             VStack(alignment: .leading, spacing: 8) {
+               HStack {
+                  Spacer()
+               }
                
                if activity.displayNote != "" {
                   Text(activity.displayNote)
-                     .font(.caption)
                }
                
                if activity.displayTotalValue != "-" {
@@ -48,7 +50,7 @@ struct ShowSessionRow: View {
                         Image(systemName: "flame.fill")
                            .foregroundColor(.blue)
                      }
-                     Spacer()
+//                     Spacer()
                   }
                }
             }
@@ -66,7 +68,6 @@ struct ShowSessionRow: View {
          
       }
       .padding([.leading, .trailing])
-
    }
    
 }

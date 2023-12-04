@@ -41,58 +41,18 @@ struct ShowSessionView: View {
             
          .padding([.leading, .trailing])
          
-         ForEach(session.activitiesAsArray) { activity in
-            ShowSessionRow(activity: activity)
-            
+         GeometryReader { geometry in
+            ScrollView {
+               ForEach(session.activitiesAsArray) { activity in
+                  ShowSessionRow(activity: activity)
+               }
+               .frame(width: geometry.size.width)
+            }
          }
          
-         Spacer()
          
-//         List(session.activitiesAsArray) { activity in
-//            Section(activity.displayExerciseName) {
-//
-//               if activity.displayTotalValue != "-" {
-//                  Text("Total: \(activity.displayTotalValue)")
-//                     .padding([.leading, .trailing])
-//               }
-//
-//               if activity.displayNote != "" {
-//                  Text(activity.displayNote)
-//                     .padding([.leading, .trailing])
-//
-//               }
-//               ForEach(activity.activitySetsAsArray) {
-//                  activitySet in
-//                  HStack {
-//                     Image(systemName: "circle.fill")
-//                        .imageScale(.small)
-//                        .foregroundColor(.green)
-//                     Text("\(activitySet.repAsInt)")
-//                     Text("x")
-//                     Text("\(activitySet.displayValue)")
-//                     Text(activitySet.displayUnit)
-//                     (Text(Image(systemName: "scalemass")) + Text(": \(activitySet.displayTotalValue)"))
-//                     Text(activitySet.displayUnit)
-//                     if activitySet.isBodyWeight {
-//                        Image(systemName: "person.fill")
-//                           .foregroundColor(.blue)
-//                     }
-//                     if activitySet.isFailure {
-//                        Image(systemName: "flame.fill")
-//                           .foregroundColor(.blue)
-//                     }
-//
-//                  }
-//
-//                  .padding([.leading, .trailing])
-//
-//               }
-//            }
-//            .listRowInsets(.init(top: 4, leading: 0, bottom: 4, trailing: 0))
-//         }
-//         .listRowInsets(.init(top: 4, leading: 0, bottom: 4, trailing: 0))
-//
-//         .listStyle(.sidebar)
+         
+         Spacer()
          
       }
       .navigationTitle(session.displayName)
