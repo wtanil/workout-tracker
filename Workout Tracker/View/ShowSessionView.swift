@@ -19,7 +19,7 @@ struct ShowSessionView: View {
             VStack(alignment: .leading) {
                
                Text("\(session.displayDate)")
-                  .font(.title3)
+//                  .font(.body)
                
                if session.displayNote != "" {
                   Toggle(showingNote ? "Note \(Image(systemName: "chevron.up"))" : "Note \(Image(systemName: "chevron.down"))", isOn: $showingNote.animation())
@@ -35,14 +35,20 @@ struct ShowSessionView: View {
             
          .padding([.leading, .trailing])
          
-         GeometryReader { geometry in
-            ScrollView {
-               ForEach(session.activitiesAsArray) { activity in
-                  ShowSessionRow(activity: activity)
-               }
-               .frame(width: geometry.size.width)
+         ScrollView(.vertical, showsIndicators: false) {
+            ForEach(session.activitiesAsArray) { activity in
+               ShowSessionRow(activity: activity)
             }
          }
+         
+//         GeometryReader { geometry in
+//            ScrollView {
+//               ForEach(session.activitiesAsArray) { activity in
+//                  ShowSessionRow(activity: activity)
+//               }
+//               .frame(width: geometry.size.width)
+//            }
+//         }
          
          
          

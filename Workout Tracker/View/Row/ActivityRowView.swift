@@ -11,10 +11,18 @@ struct ActivityRowView: View {
    
    @ObservedObject var activity: Activity
    
-   @State var activityUnit: String = ActivityUnit.kg.rawValue
+//   @State var activityUnit: String = ActivityUnit.kg.rawValue
+   @State var activityUnit: String
    
    var newActivitySetAction: () -> ()
    var deleteActivityAction: () -> ()
+   
+   init(activity: Activity, newActivitySetAction: @escaping () -> (), deleteActivityAction: @escaping () -> ()) {
+      self.activity = activity
+      self.activityUnit = activity.displayActivitySetUnit
+      self.newActivitySetAction = newActivitySetAction
+      self.deleteActivityAction = deleteActivityAction
+   }
    
    var body: some View {
       VStack(alignment: .leading) {

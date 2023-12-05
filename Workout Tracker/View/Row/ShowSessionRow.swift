@@ -17,10 +17,11 @@ struct ShowSessionRow: View {
       Group {
          DisclosureGroup(isExpanded: $shouldExpand) {
             
-            VStack(alignment: .leading, spacing: 8) {
+            LazyVStack(alignment: .leading, spacing: 4) {
                HStack {
                   Spacer()
                }
+               .frame(height: 1)
                
                if activity.displayNote != "" {
                   Text(activity.displayNote)
@@ -58,10 +59,10 @@ struct ShowSessionRow: View {
          } label: {
             Text(activity.displayExerciseName)
                .foregroundColor(Color.green)
-               .font(.title3.weight(.bold))
+               .font(.body.weight(.bold))
                
          }
-         .padding()
+         .padding(12)
          .modifier(ShowSessionRowViewModifier())
          
       }

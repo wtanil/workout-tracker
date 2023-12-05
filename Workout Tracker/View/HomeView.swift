@@ -12,6 +12,10 @@ struct HomeView: View {
    
    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) private var sessions: FetchedResults<Session>
    
+//   init() {
+//      UITableView.appearance().showsVerticalScrollIndicator = false
+//   }
+   
    var body: some View {
       
       NavigationView {
@@ -37,7 +41,7 @@ struct HomeView: View {
                .padding(.top, 16)
                .modifier(SectionHeader())
             
-            List {
+            ScrollView(.vertical, showsIndicators: false) {
                ForEach(sessions) { session in
                   
                   NavigationLink {
@@ -45,11 +49,24 @@ struct HomeView: View {
                   } label: {
                      HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValue)
                   }
-                  .padding()
+                  .padding(12)
                   .modifier(HomeSessionRow())
                }
             }
-            .listStyle(.plain)
+            
+//            List {
+//               ForEach(sessions) { session in
+//
+//                  NavigationLink {
+//                     ShowSessionView(session: session)
+//                  } label: {
+//                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValue)
+//                  }
+//                  .padding(12)
+//                  .modifier(HomeSessionRow())
+//               }
+//            }
+//            .listStyle(.plain)
          }
          .navigationTitle("Home")
          .padding([.leading, .trailing])

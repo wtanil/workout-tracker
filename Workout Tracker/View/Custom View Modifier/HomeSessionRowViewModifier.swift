@@ -17,8 +17,8 @@ struct HomeSessionRow: ViewModifier {
                .inset(by: 0)
                .strokeBorder(.red, lineWidth: 2, antialiased: true)
          )
-         .listRowSeparator(.hidden)
-         .listRowInsets(.init(top: 4, leading: 0, bottom: 4, trailing: 0))
-         .listRowBackground(Color.clear)
+//         .listRowSeparator(.hidden)
+//         .listRowInsets(.init(top: 4, leading: 0, bottom: 4, trailing: 0))
+//         .listRowBackground(Color.clear)
    }
 }

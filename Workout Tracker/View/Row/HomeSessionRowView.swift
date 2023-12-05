@@ -14,16 +14,22 @@ struct HomeSessionRowView: View {
    var totalValue: String
    
    var body: some View {
-      VStack(alignment: .leading) {
+      
+      LazyVStack(alignment: .leading) {
          Text(name)
-            .font(.title3.weight(.bold))
+            .font(.body.weight(.bold))
             .foregroundColor(Color.red)
          
-         Text(date)
-            .font(.caption)
+         Group {
+            Text(date)
+               .font(.caption)
+            
+            Text("Exercises: \(activityCount)")
+            Text("Total: \(totalValue)")
+         }
+         .foregroundColor(Color.primary)
          
-         Text("Exercises: \(activityCount)")
-         Text("Total: \(totalValue)")
+         
          
       }
    }
