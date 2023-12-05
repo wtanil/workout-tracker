@@ -28,9 +28,6 @@ struct HomeSessionRowView: View {
             Text("Total: \(totalValue)")
          }
          .foregroundColor(Color.primary)
-         
-         
-         
       }
    }
 }

@@ -183,10 +183,13 @@ extension PersistenceController {
       
       for workout in workouts {
          let category = categoryDict[workout.category]!
-         let equipment = equipmentDict[workout.equipment ?? "other"]!
-         let force = forceDict[workout.force ?? "other"]!
+         let equipmentTemp = workout.equipment ?? "other"
+         let equipment = equipmentDict[equipmentTemp]!
+         let forceTemp = workout.force ?? "other"
+         let force = forceDict[forceTemp]!
          let level = levelDict[workout.level]!
-         let mechanic = mechanicDict[workout.mechanic ?? "other"]!
+         let mechanicTemp = workout.mechanic ?? "other"
+         let mechanic = mechanicDict[mechanicTemp]!
          let muscle = muscleDict[workout.primaryMuscles[0]]!
          
          let newExercise = Exercise.make(in: context,
