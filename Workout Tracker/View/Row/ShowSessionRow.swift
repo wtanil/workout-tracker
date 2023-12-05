@@ -57,16 +57,12 @@ struct ShowSessionRow: View {
             
          } label: {
             Text(activity.displayExerciseName)
+               .foregroundColor(Color.green)
+               .font(.title3.weight(.bold))
                
          }
          .padding()
-         .background(Color.red.opacity(0.1))
-         .cornerRadius(16, antialiased: true)
-         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-               .inset(by: 0)
-               .strokeBorder(.red, lineWidth: 2, antialiased: true)
-         )
+         .modifier(ShowSessionRowViewModifier())
          
       }
       .padding([.leading, .trailing])

@@ -12,6 +12,8 @@
 		AA3A82A22B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82A12B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift */; };
 		AA3A82A42B1DB0E7005D2C32 /* ActionButtonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82A32B1DB0E7005D2C32 /* ActionButtonViewModifier.swift */; };
 		AA3A82A92B1DC9A2005D2C32 /* ShowSessionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */; };
+		AA3A82AB2B1DD875005D2C32 /* AccessoryToggleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82AA2B1DD875005D2C32 /* AccessoryToggleViewModifier.swift */; };
+		AA3A82AD2B1DD91F005D2C32 /* ShowSessionRowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A82AC2B1DD91F005D2C32 /* ShowSessionRowViewModifier.swift */; };
 		AA3F479F2AFE099C00E55B9D /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */; };
 		AA3F47A32AFE1EB100E55B9D /* ActivitySet+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F47A22AFE1EB100E55B9D /* ActivitySet+extension.swift */; };
 		AA3F47A52AFE55C400E55B9D /* Binding+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F47A42AFE55C400E55B9D /* Binding+extension.swift */; };
@@ -68,6 +70,8 @@
 		AA3A82A12B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSessionRowViewModifier.swift; sourceTree = "<group>"; };
 		AA3A82A32B1DB0E7005D2C32 /* ActionButtonViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonViewModifier.swift; sourceTree = "<group>"; };
 		AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSessionRow.swift; sourceTree = "<group>"; };
+		AA3A82AA2B1DD875005D2C32 /* AccessoryToggleViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryToggleViewModifier.swift; sourceTree = "<group>"; };
+		AA3A82AC2B1DD91F005D2C32 /* ShowSessionRowViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSessionRowViewModifier.swift; sourceTree = "<group>"; };
 		AA3F479E2AFE099C00E55B9D /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		AA3F47A22AFE1EB100E55B9D /* ActivitySet+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivitySet+extension.swift"; sourceTree = "<group>"; };
 		AA3F47A42AFE55C400E55B9D /* Binding+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+extension.swift"; sourceTree = "<group>"; };
@@ -134,8 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				AA3A829F2B1DAF95005D2C32 /* SectionHeader.swift */,
+				AA3A82AC2B1DD91F005D2C32 /* ShowSessionRowViewModifier.swift */,
 				AA3A82A12B1DB06C005D2C32 /* HomeSessionRowViewModifier.swift */,
 				AA3A82A32B1DB0E7005D2C32 /* ActionButtonViewModifier.swift */,
+				AA3A82AA2B1DD875005D2C32 /* AccessoryToggleViewModifier.swift */,
 			);
 			path = "Custom View Modifier";
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 		AAB9BD8C2B031EB000FFD585 /* Row */ = {
 			isa = PBXGroup;
 			children = (
+				AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */,
 				AAB9BD912B03505A00FFD585 /* HomeSessionRowView.swift */,
 				AAA229562B020E5D0088A7EA /* ActivityRowView.swift */,
 				AAA229522B01DFCE0088A7EA /* ActivitySetRowView.swift */,
@@ -274,7 +281,6 @@
 				AAFCD2932B107A480092BC97 /* ExercisesView.swift */,
 				AAFCD2952B1082980092BC97 /* ShowExerciseView.swift */,
 				AAFCD2972B1089360092BC97 /* NewExerciseView.swift */,
-				AA3A82A82B1DC9A2005D2C32 /* ShowSessionRow.swift */,
 			);
 			path = "Exercise Tab";
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3A82AB2B1DD875005D2C32 /* AccessoryToggleViewModifier.swift in Sources */,
 				AA3A82A92B1DC9A2005D2C32 /* ShowSessionRow.swift in Sources */,
 				AAA229572B020E5D0088A7EA /* ActivityRowView.swift in Sources */,
 				AAC980FF2AFDD13900816BE9 /* Session+extension.swift in Sources */,
@@ -432,6 +439,7 @@
 				AAD760322AFB64C100CC6DA9 /* SelectActivitiesView.swift in Sources */,
 				AAB9BD922B03505A00FFD585 /* HomeSessionRowView.swift in Sources */,
 				AAFCD2942B107A480092BC97 /* ExercisesView.swift in Sources */,
+				AA3A82AD2B1DD91F005D2C32 /* ShowSessionRowViewModifier.swift in Sources */,
 				AA3F47A52AFE55C400E55B9D /* Binding+extension.swift in Sources */,
 				AA3F47A32AFE1EB100E55B9D /* ActivitySet+extension.swift in Sources */,
 				AA639A342B19737900B9B560 /* EditSessionView.swift in Sources */,

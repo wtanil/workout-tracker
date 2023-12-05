@@ -23,15 +23,7 @@ struct ShowSessionView: View {
                
                if session.displayNote != "" {
                   Toggle(showingNote ? "Note \(Image(systemName: "chevron.up"))" : "Note \(Image(systemName: "chevron.down"))", isOn: $showingNote.animation())
-                     .toggleStyle(.button)
-                     .tint(.blue)
-                     .cornerRadius(16, antialiased: true)
-                     .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                           .inset(by: 0)
-                           .strokeBorder(.blue, lineWidth: 2, antialiased: true)
-                     )
-                     
+                     .modifier(AccessoryToggle())
                }
                
                if showingNote {

@@ -26,7 +26,7 @@ struct HomeView: View {
                         Text(Image(systemName: "plus"))
                         Text("Start A New Session")
                      }
-//                     .foregroundColor(.white)
+                     .foregroundColor(.white)
                   }
                }
                .padding()

@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeSessionRow: ViewModifier {
    func body(content: Content) -> some View {
       content
-         .background(Color.red.opacity(0.1))
+//         .background(Color.black.opacity(0.5))
          .cornerRadius(16, antialiased: true)
          .overlay(
             RoundedRectangle(cornerRadius: 16)
