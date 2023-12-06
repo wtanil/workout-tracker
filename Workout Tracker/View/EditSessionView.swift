@@ -25,7 +25,7 @@ struct EditSessionView: View {
       self.session = session
       self._name = State(initialValue: session.displayName)
       self._note = State(initialValue: session.displayNote)
-      self._date = State(initialValue: session.date!)
+      self._date = State(initialValue: session.date ?? Date())
       self._activities = State(initialValue: session.computedActivities)
    }
    
@@ -87,7 +87,7 @@ struct EditSessionView: View {
          session.name = name
          session.date = date
          session.note = note
-         session.updated = session.updated ? false : true
+         
          do {
             try managedObjectContext.save()
          } catch {

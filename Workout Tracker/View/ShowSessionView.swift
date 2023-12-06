@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ShowSessionView: View {
+   @Environment(\.managedObjectContext) var managedObjectContext
+   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
    
    @ObservedObject var session: Session
    
    @State private var showingNote: Bool = false
+   @State private var showingDeleteAlert: Bool = false
    
    var body: some View {
       VStack(alignment: .leading) {
@@ -41,45 +44,51 @@ struct ShowSessionView: View {
             }
          }
          
-//         GeometryReader { geometry in
-//            ScrollView {
-//               ForEach(session.activitiesAsArray) { activity in
-//                  ShowSessionRow(activity: activity)
-//               }
-//               .frame(width: geometry.size.width)
-//            }
-//         }
-         
-         
-         
          Spacer()
          
       }
       .navigationTitle(session.displayName)
-      
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem
          }
       }
+      .alert(isPresented: $showingDeleteAlert, content: { deleteAlert })
       
    }
    
    private var navigationBarTrailingItem: some View {
       
-      NavigationLink("Edit", destination: EditSessionView(session: session))
+      HStack {
+         NavigationLink("Edit", destination: EditSessionView(session: session))
+         
+         Button() {
+            self.showingDeleteAlert.toggle()
+         } label: {
+            Text("Delete")
+         }
+      }
+   }
+   
+   private var deleteAlert: Alert {
+      Alert(title: Text("Warning"),
+            message: Text("Do you want to delete?"),
+            primaryButton: .destructive(Text("Delete"),
+                                        action: deleteMeasurement),
+            secondaryButton: .default(Text("Cancel"))
+      )
+   }
+   
+   func deleteMeasurement() {
+      managedObjectContext.delete(session)
+      do {
+         try managedObjectContext.save()
+      } catch {
+         let nsError = error as NSError
+         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+      }
       
-      // to delete, start async thread, then go back
-      
-      //      Menu {
-      //
-      //         Divider()
-      //         Button("Delete", role: .destructive) {
-      //            print("asdf")
-      //         }
-      //      } label: {
-      //         Label("", systemImage: "ellipsis")
-      //      }
+      presentationMode.wrappedValue.dismiss()
    }
 }
 

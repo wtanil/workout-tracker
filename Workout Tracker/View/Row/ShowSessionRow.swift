@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShowSessionRow: View {
    
-   var activity: Activity
+   @ObservedObject var activity: Activity
    @State private var shouldExpand = true
    
    var body: some View {
