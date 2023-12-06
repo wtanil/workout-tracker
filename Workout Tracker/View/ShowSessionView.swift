@@ -19,30 +19,53 @@ struct ShowSessionView: View {
    var body: some View {
       VStack(alignment: .leading) {
          
-            VStack(alignment: .leading) {
-               
-               Text("\(session.displayDate)")
-//                  .font(.body)
-               
-               if session.displayNote != "" {
-                  Toggle(showingNote ? "Note \(Image(systemName: "chevron.up"))" : "Note \(Image(systemName: "chevron.down"))", isOn: $showingNote.animation())
-                     .modifier(AccessoryToggle())
-               }
-               
-               if showingNote {
-                  Text("\(session.displayNote)")
-               }
-               
-               HStack { Spacer() }
+         VStack(alignment: .leading) {
+            
+            Text("\(session.displayDate)")
+            //                  .font(.body)
+            
+            if session.displayNote != "" {
+               Toggle(showingNote ? "Note \(Image(systemName: "chevron.up"))" : "Note \(Image(systemName: "chevron.down"))", isOn: $showingNote.animation())
+                  .modifier(AccessoryToggle())
             }
             
+            if showingNote {
+               Text("\(session.displayNote)")
+            }
+            
+            HStack { Spacer() }
+         }
+         
          .padding([.leading, .trailing])
          
-         ScrollView(.vertical, showsIndicators: false) {
-            ForEach(session.activitiesAsArray) { activity in
-               ShowSessionRow(activity: activity)
+         if session.activityCount == 0 {
+
+            Group {
+               VStack {
+                  NavigationLink {
+                     EditSessionView(session: session)
+                  } label: {
+                     HStack {
+                        Text("Add more exercises!")
+                     }
+                     .foregroundColor(.white)
+                  }
+               }
+               .padding(10)
+               .modifier(ActionButton())
+            }
+            .padding([.leading, .trailing])
+            
+            
+
+         } else {
+            ScrollView(.vertical, showsIndicators: false) {
+               ForEach(session.activitiesAsArray) { activity in
+                  ShowSessionRow(activity: activity)
+               }
             }
          }
+         
          
          Spacer()
          
