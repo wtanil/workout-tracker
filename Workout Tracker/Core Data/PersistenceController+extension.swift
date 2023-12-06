@@ -272,6 +272,8 @@ extension PersistenceController {
    
    func fetchCategory(in context: NSManagedObjectContext) -> [Category] {
       let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+      
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -282,6 +284,7 @@ extension PersistenceController {
    
    func fetchEquipment(in context: NSManagedObjectContext) -> [Equipment] {
       let fetchRequest: NSFetchRequest<Equipment> = Equipment.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -292,6 +295,7 @@ extension PersistenceController {
    
    func fetchForce(in context: NSManagedObjectContext) -> [Force] {
       let fetchRequest: NSFetchRequest<Force> = Force.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -302,6 +306,7 @@ extension PersistenceController {
    
    func fetchLevel(in context: NSManagedObjectContext) -> [Level] {
       let fetchRequest: NSFetchRequest<Level> = Level.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -312,6 +317,7 @@ extension PersistenceController {
    
    func fetchMechanic(in context: NSManagedObjectContext) -> [Mechanic] {
       let fetchRequest: NSFetchRequest<Mechanic> = Mechanic.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -322,6 +328,7 @@ extension PersistenceController {
    
    func fetchMuscle(in context: NSManagedObjectContext) -> [Muscle] {
       let fetchRequest: NSFetchRequest<Muscle> = Muscle.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects

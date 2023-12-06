@@ -61,7 +61,12 @@ struct NewExerciseView: View {
                 TextField("Name", text: $name)
                 TextField("Link", text: $link)
                 TextField("Note", text: $note)
+             }
+             
+             Section {
                 TextField("Instructions", text: $instructions)
+             } footer: {
+                Text("Separate each step with a comma.")
              }
              
              Section {
