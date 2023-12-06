@@ -74,6 +74,29 @@ extension Session {
       "\(activityCount)"
    }
    
+   var totalValues: [String: Double] {
+      let array = activitiesAsArray
+      var dict = [String: Double]()
+      for activity in array {
+         for (unit, value) in activity.totalValues {
+            dict[unit, default: 0] += value
+         }
+      }
+      return dict
+   }
+   
+   var displayTotalValues: String {
+      let dict = totalValues.sorted { $0.value > $1.value }
+      if dict.isEmpty {
+         return "-"
+      }
+      let string = dict.map { unit, value in
+         let temp = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: value)) ?? "-"
+         return "\(temp) \(unit)"
+      }.joined(separator: ", ")
+      return string
+   }
+   
    var totalValue: Double {
       
 //      return activitiesAsArray.reduce(0, { $0 + $1.totalValue })

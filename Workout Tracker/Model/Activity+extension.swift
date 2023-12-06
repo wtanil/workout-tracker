@@ -66,6 +66,9 @@ extension Activity {
       let totalValuesDict = totalValues.sorted { lhs, rhs in
          lhs.value > rhs.value
       }
+      if totalValuesDict.isEmpty {
+         return "-"
+      }
       let string = totalValuesDict.map { unit, value in
          let temp = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: value)) ?? "-"
          return "\(temp) \(unit)"

@@ -26,6 +26,7 @@ struct HomeSessionRowView: View {
             
             Text("Exercises: \(activityCount)")
             Text("Total: \(totalValue)")
+               .multilineTextAlignment(.leading)
          }
          .foregroundColor(Color.primary)
       }

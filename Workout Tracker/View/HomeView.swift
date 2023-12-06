@@ -51,7 +51,7 @@ struct HomeView: View {
                   NavigationLink {
                      ShowSessionView(session: session)
                   } label: {
-                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValue)
+                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValues)
                   }
                   .padding(12)
                   .modifier(HomeSessionRow())
