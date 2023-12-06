@@ -33,8 +33,12 @@ struct HomeView: View {
                      .foregroundColor(.white)
                   }
                }
-               .padding()
+               .padding(12)
                .modifier(ActionButton())
+            }
+            
+            HStack {
+               Spacer()
             }
             
             Text("Past Session")
@@ -53,20 +57,6 @@ struct HomeView: View {
                   .modifier(HomeSessionRow())
                }
             }
-            
-//            List {
-//               ForEach(sessions) { session in
-//
-//                  NavigationLink {
-//                     ShowSessionView(session: session)
-//                  } label: {
-//                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValue)
-//                  }
-//                  .padding(12)
-//                  .modifier(HomeSessionRow())
-//               }
-//            }
-//            .listStyle(.plain)
          }
          .navigationTitle("Home")
          .padding([.leading, .trailing])
