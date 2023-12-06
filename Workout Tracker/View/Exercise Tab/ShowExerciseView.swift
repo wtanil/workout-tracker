@@ -22,7 +22,7 @@ struct ShowExerciseView: View {
                Text("Target: \(exercise.displayMuscle)")
                Text("Category: \(exercise.displayCategory)")
                Text("Equipment: \(exercise.displayEquipment)")
-               Text("Mechanic \(exercise.displayMechanic)")
+               Text("Mechanic: \(exercise.displayMechanic)")
                if exercise.displayLink != "" {
                   Text("Link: \(exercise.displayLink)")
                }

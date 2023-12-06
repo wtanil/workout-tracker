@@ -125,16 +125,16 @@ extension PersistenceController {
    }
    
    
-//   func initialize(in context: NSManagedObjectContext) {
-//
-//      let categoryDict = initializeCategories(in: context)
-//      let equipmentDict = initializeEquipments(in: context)
-//      let forceDict = initializeForces(in: context)
-//      let levelDict = initializeLevels(in: context)
-//      let mechanicDict = initializeMechanics(in: context)
-//      let muscleDict = initializeMuscles(in: context)
-//
-//   }
+   //   func initialize(in context: NSManagedObjectContext) {
+   //
+   //      let categoryDict = initializeCategories(in: context)
+   //      let equipmentDict = initializeEquipments(in: context)
+   //      let forceDict = initializeForces(in: context)
+   //      let levelDict = initializeLevels(in: context)
+   //      let mechanicDict = initializeMechanics(in: context)
+   //      let muscleDict = initializeMuscles(in: context)
+   //
+   //   }
    
    func getFromJSON(isPreview: Bool = false) -> [Workout] {
       var source = "Workout-Data"
@@ -253,8 +253,12 @@ extension PersistenceController {
       }
       // end of generate preview data
       
+      
       do {
+         //         try context.performAndWait {
          try context.save()
+         //         }
+         
          return true
       } catch {
          // Replace this implementation with code to handle the error appropriately.
