@@ -60,13 +60,13 @@ struct ShowSessionView: View {
    private var navigationBarTrailingItem: some View {
       
       HStack {
-         NavigationLink("Edit", destination: EditSessionView(session: session))
-         
          Button() {
             self.showingDeleteAlert.toggle()
          } label: {
             Text("Delete")
          }
+         
+         NavigationLink("Edit", destination: EditSessionView(session: session))
       }
    }
    

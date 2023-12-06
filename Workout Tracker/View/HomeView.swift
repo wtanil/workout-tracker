@@ -12,10 +12,6 @@ struct HomeView: View {
    
    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) private var sessions: FetchedResults<Session>
    
-//   init() {
-//      UITableView.appearance().showsVerticalScrollIndicator = false
-//   }
-   
    var body: some View {
       
       NavigationView {
@@ -33,11 +29,9 @@ struct HomeView: View {
                      .foregroundColor(.white)
                   }
                }
-               .padding(12)
+               .padding(10)
                .modifier(ActionButton())
-            }
-            
-            HStack {
+               
                Spacer()
             }
             

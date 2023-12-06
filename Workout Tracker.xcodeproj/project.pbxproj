@@ -241,10 +241,10 @@
 			children = (
 				AA439D442AEF9C7600D2D383 /* ContentView.swift */,
 				AA1A16802AF8D64B001B7149 /* HomeView.swift */,
+				AAB9BD8D2B031ED700FFD585 /* ShowSessionView.swift */,
 				AA4223F72AF8E62B0023E55B /* NewSessionView.swift */,
 				AA639A332B19737900B9B560 /* EditSessionView.swift */,
 				AAD760312AFB64C100CC6DA9 /* SelectActivitiesView.swift */,
-				AAB9BD8D2B031ED700FFD585 /* ShowSessionView.swift */,
 				AAFCD2992B10893F0092BC97 /* Exercise Tab */,
 				AAB9BD8C2B031EB000FFD585 /* Row */,
 				AA3A829E2B1DAF27005D2C32 /* Custom View Modifier */,
