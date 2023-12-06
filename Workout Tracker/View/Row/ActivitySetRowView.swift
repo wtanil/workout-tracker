@@ -70,12 +70,3 @@ struct ActivitySetRowView: View {
       }
    }
 }
-
-struct ActivitySetRowView_Previews: PreviewProvider {
-   static var previews: some View {
-      
-      let context = PersistenceController.preview.container.viewContext
-      ActivitySetRowView(activity: Activity(context: context), activitySet: ActivitySet(context: context), activityUnit: .constant("kg"))
-         .environment(\.managedObjectContext, context)
-   }
-}

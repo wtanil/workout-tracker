@@ -102,13 +102,3 @@ struct EditSessionView: View {
       })
    }
 }
-
-struct EditSessionView_Previews: PreviewProvider {
-   static var previews: some View {
-      
-      let context = PersistenceController.preview.container.viewContext
-      NewExerciseView()
-      EditSessionView(session: Session(context: context))
-         .environment(\.managedObjectContext, context)
-   }
-}

@@ -60,15 +60,3 @@ struct ActivityRowView: View {
       }
    }
 }
-
-struct ActivityRowView_Previews: PreviewProvider {
-   static var previews: some View {
-      let context = PersistenceController.preview.container.viewContext
-      ActivityRowView(activity: Activity.make(in: context, note: "")) {
-         print("add")
-      } deleteActivityAction: {
-         print("delete")
-      }
-         .environment(\.managedObjectContext, context)
-   }
-}

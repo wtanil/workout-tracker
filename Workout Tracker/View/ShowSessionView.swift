@@ -74,12 +74,12 @@ struct ShowSessionView: View {
       Alert(title: Text("Warning"),
             message: Text("Do you want to delete?"),
             primaryButton: .destructive(Text("Delete"),
-                                        action: deleteMeasurement),
+                                        action: deleteSession),
             secondaryButton: .default(Text("Cancel"))
       )
    }
    
-   func deleteMeasurement() {
+   func deleteSession() {
       managedObjectContext.delete(session)
       do {
          try managedObjectContext.save()
@@ -89,14 +89,5 @@ struct ShowSessionView: View {
       }
       
       presentationMode.wrappedValue.dismiss()
-   }
-}
-
-struct SessionView_Previews: PreviewProvider {
-   static var previews: some View {
-      
-      let context = PersistenceController.preview.container.viewContext
-      ShowSessionView(session: Session(context: context))
-         .environment(\.managedObjectContext, context)
    }
 }

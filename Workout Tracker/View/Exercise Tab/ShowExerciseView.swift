@@ -57,11 +57,3 @@ struct ShowExerciseView: View {
       .navigationTitle("Exercise")
    }
 }
-
-struct ShowExerciseView_Previews: PreviewProvider {
-   static var previews: some View {
-      let context = PersistenceController.preview.container.viewContext
-      ShowExerciseView(exercise: Exercise.init(context: context))
-         .environment(\.managedObjectContext, context)
-   }
-}

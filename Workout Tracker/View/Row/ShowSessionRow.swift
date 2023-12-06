@@ -68,10 +68,3 @@ struct ShowSessionRow: View {
    }
    
 }
-
-struct ShowSessionRow_Previews: PreviewProvider {
-   static var previews: some View {
-      let context = PersistenceController.preview.container.viewContext
-      ShowSessionRow(activity: Activity(context: context))
-   }
-}
