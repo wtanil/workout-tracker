@@ -35,7 +35,7 @@ struct NewSessionView: View {
                Section(activity.displayExerciseName) {
                   VStack(alignment: .leading) {
                      ActivityRowView(activity: activity) {
-                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: "kg")
+                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: activity.displayActivitySetUnit)
                         var setAsArray = activity.computedActivitySets
                         setAsArray.append(newSet)
                         activity.computedActivitySets = setAsArray

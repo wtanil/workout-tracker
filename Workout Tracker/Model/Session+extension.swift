@@ -103,19 +103,6 @@ extension Session {
       return 0
    }
    
-   var displayTotalValue: String {
-      let temp: Double = totalValue
-      if activityCount == 0 {
-         return "-"
-      }
-      let unit = activitiesAsArray[0].displayActivitySetUnit
-      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: temp)) ?? "-"
-      if unit == "-" {
-         return "\(string)"
-      }
-      return "\(string) \(unit)"
-      
-   }
 }
 
 extension Session {

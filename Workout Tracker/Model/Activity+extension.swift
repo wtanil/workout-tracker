@@ -79,15 +79,10 @@ extension Activity {
    
    var displayActivitySetUnit: String {
       if activitySetCount == 0 {
-         return "-"
+         return "kg"
       }
       let unit = activitySetsAsArray[0].displayUnit
       return unit
-   }
-   
-   var bestActivitySet: ActivitySet? {
-      let array = activitySetsAsArray.sorted { $0.totalValue > $1.totalValue }
-      return array.first
    }
    
    var computedActivitySets: [ActivitySet] {
