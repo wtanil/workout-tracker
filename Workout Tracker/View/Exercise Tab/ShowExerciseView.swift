@@ -16,6 +16,8 @@ struct ShowExerciseView: View {
    var body: some View {
       ScrollView(.vertical, showsIndicators: false) {
          VStack(alignment: .leading) {
+            Text(exercise.displayName)
+               .modifier(SectionHeader())
             Group {
                Text("Level: \(exercise.displayLevel)")
                Text("Force: \(exercise.displayForce)")
@@ -52,7 +54,7 @@ struct ShowExerciseView: View {
          }
       }
       .padding([.leading, .trailing])
-      .navigationTitle(exercise.displayName)
+      .navigationTitle("Exercise")
    }
 }
 
