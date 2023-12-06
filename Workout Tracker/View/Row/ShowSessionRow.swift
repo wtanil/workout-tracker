@@ -27,9 +27,7 @@ struct ShowSessionRow: View {
                   Text(activity.displayNote)
                }
                
-               if activity.displayTotalValue != "-" {
-                  Text("Total: \(activity.displayTotalValue)")
-               }
+               Text("Total: \(activity.displayTotalValues)")
                
                ForEach(activity.activitySetsAsArray) {
                   activitySet in

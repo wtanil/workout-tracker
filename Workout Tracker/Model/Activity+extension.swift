@@ -40,13 +40,38 @@ extension Activity {
       sets?.count ?? 0
    }
    
-   var totalValue: Double {
+   var totalValues: [String: Double] {
       let activitySets = activitySetsAsArray
       if activitySets.isEmpty {
-         return 0
+         return [String: Double]()
       }
-      let totalValue: Double = activitySets.reduce(0) { $0 + $1.totalValue }
-      return totalValue
+      let dict = Dictionary(grouping: activitySets) { $0.displayUnit
+      }
+      var sumDict = [String: Double]()
+      for (unit, sets) in dict {
+         sumDict[unit] = sets.reduce(0) { $0 + $1.totalValue }
+      }
+      
+      return sumDict
+   }
+   
+   var displayTotalValue: String {
+      let totalValuesDict = totalValues
+      let totalValue = totalValuesDict.max { $0.value > $1.value }
+      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: totalValue!.value)) ?? "-"
+      return "\(string) \(totalValue!.key)"
+   }
+   
+   var displayTotalValues: String {
+      let totalValuesDict = totalValues.sorted { lhs, rhs in
+         lhs.value > rhs.value
+      }
+      let string = totalValuesDict.map { unit, value in
+         let temp = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: value)) ?? "-"
+         return "\(temp) \(unit)"
+      }.joined(separator: ", ")
+
+      return string
    }
    
    var displayActivitySetUnit: String {
@@ -55,18 +80,6 @@ extension Activity {
       }
       let unit = activitySetsAsArray[0].displayUnit
       return unit
-   }
-   
-   var displayTotalValue: String {
-      
-      let temp: Double = totalValue
-      let unit = displayActivitySetUnit
-      
-      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: temp)) ?? "-"
-      if unit == "-" {
-         return "\(string)"
-      }
-      return "\(string) \(unit)"
    }
    
    var bestActivitySet: ActivitySet? {

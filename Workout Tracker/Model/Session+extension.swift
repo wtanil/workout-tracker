@@ -76,7 +76,8 @@ extension Session {
    
    var totalValue: Double {
       
-      return activitiesAsArray.reduce(0, { $0 + $1.totalValue })
+//      return activitiesAsArray.reduce(0, { $0 + $1.totalValue })
+      return 0
    }
    
    var displayTotalValue: String {
