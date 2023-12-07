@@ -16,7 +16,6 @@ struct NewExerciseView: View {
    @State private var name: String = ""
    @State private var link: String = ""
    @State private var note: String = ""
-   @State private var instructions: String = ""
    
    private var categories: [Category]
    @State private var category: Category
@@ -31,6 +30,7 @@ struct NewExerciseView: View {
    private var muscles: [Muscle]
    @State private var muscle: Muscle
    
+   @State var instructions = [String?]()
    
    init() {
       // Category
@@ -53,7 +53,6 @@ struct NewExerciseView: View {
       self._muscle = State(initialValue: muscles.first!)
    }
    
-   
     var body: some View {
        NavigationView {
           Form {
@@ -64,11 +63,30 @@ struct NewExerciseView: View {
              }
              
              Section {
-                TextField("Instructions", text: $instructions)
-             } footer: {
-                Text("Separate each step with a comma.")
+                Button {
+                   instructions.append("")
+                } label: {
+                   Text("Add a step")
+                }
+
+                ForEach(0 ..< instructions.count, id: \.self) { index in
+                   HStack {
+                      TextField("Step \(index + 1)", text: getBinding(forIndex: index))
+                      Spacer()
+                         Button {
+                            instructions[index] = ""
+                            instructions.remove(at: index)
+                         } label: {
+                            Image(systemName: "minus.circle")
+                               .foregroundColor(.red)
+                         }
+                         .buttonStyle(.plain)
+                   }
+                }
+             } header: {
+                Text("Instructions")
              }
-             
+
              Section {
                 Picker("Category", selection: $category) {
                    ForEach(categories) { object in
@@ -129,7 +147,7 @@ struct NewExerciseView: View {
    private var navigationBarTrailingItem: some View {
       Button(action: {
          
-         _ = Exercise.make(in: managedObjectContext, name: name, link: link, note: note, instructions: [instructions], category: category, equipment: equipment, force: force, level: level, mechanic: mechanic, muscle: muscle)
+         _ = Exercise.make(in: managedObjectContext, name: name, link: link, note: note, instructions: instructions.compactMap { $0 }, category: category, equipment: equipment, force: force, level: level, mechanic: mechanic, muscle: muscle)
          
          do {
             try managedObjectContext.save()
@@ -150,6 +168,19 @@ struct NewExerciseView: View {
          presentationMode.wrappedValue.dismiss()
       }, label: {
          Text("Dismiss")
+      })
+   }
+   
+   func getBinding(forIndex index: Int) -> Binding<String> {
+      return Binding<String>(
+         get: {
+            if index > instructions.count - 1 {
+               return ""
+            } else {
+               return instructions[index]!
+            }
+      }, set: {
+         instructions[index] = $0
       })
    }
 }

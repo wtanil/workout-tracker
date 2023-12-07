@@ -144,7 +144,7 @@ extension PersistenceController {
       guard let path = Bundle.main.path(forResource: source, ofType: "json") else {
          fatalError("JSON file not found!")
       }
-      // TODO: soon to be deprecated, use "let url = URL(filePath: path)"
+      
       let url = URL(fileURLWithPath: path)
       
       let decoder = JSONDecoder()

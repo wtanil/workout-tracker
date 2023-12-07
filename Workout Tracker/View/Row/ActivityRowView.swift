@@ -48,7 +48,7 @@ struct ActivityRowView: View {
             Button(role: .destructive, action: {
                deleteActivityAction()
             }, label: {
-               Image(systemName: "trash")
+               Image(systemName: "minus.circle")
             })
          }
          ForEach(activity.activitySetsAsArray) { activitySet in
