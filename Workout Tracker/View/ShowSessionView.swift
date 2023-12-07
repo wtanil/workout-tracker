@@ -21,6 +21,9 @@ struct ShowSessionView: View {
          
          VStack(alignment: .leading) {
             
+            Text("\(session.displayName)")
+               .modifier(SectionHeader())
+            
             Text("\(session.displayDate)")
             //                  .font(.body)
             
@@ -70,7 +73,8 @@ struct ShowSessionView: View {
          Spacer()
          
       }
-      .navigationTitle(session.displayName)
+      .navigationTitle("Session")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem

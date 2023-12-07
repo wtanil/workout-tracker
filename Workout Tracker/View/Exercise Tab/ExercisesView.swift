@@ -23,8 +23,7 @@ struct ExercisesView: View {
       NavigationView {
          VStack(alignment: .leading) {
             TextField("Search", text: $searchText)
-               .padding(.leading, 16)
-               .padding(.trailing, 16)
+               .padding(.horizontal)
             
             List {
                ForEach(exerciseSections) { section in
@@ -56,6 +55,7 @@ struct ExercisesView: View {
             }
          }
          .navigationTitle("Exercises")
+//         .navigationBarTitleDisplayMode(.inline)
          .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                navigationBarTrailingItem

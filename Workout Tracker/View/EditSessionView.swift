@@ -59,6 +59,7 @@ struct EditSessionView: View {
          }
       }
       .navigationTitle("Edit Session")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem

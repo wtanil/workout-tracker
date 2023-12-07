@@ -49,6 +49,7 @@ struct NewSessionView: View {
          }
       }
       .navigationTitle("New Session")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem

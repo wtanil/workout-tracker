@@ -55,5 +55,6 @@ struct ShowExerciseView: View {
       }
       .padding([.leading, .trailing])
       .navigationTitle("Exercise")
+      .navigationBarTitleDisplayMode(.inline)
    }
 }

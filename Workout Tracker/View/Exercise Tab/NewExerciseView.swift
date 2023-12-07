@@ -133,6 +133,7 @@ struct NewExerciseView: View {
              }
           }
           .navigationTitle("New Exercise")
+          .navigationBarTitleDisplayMode(.inline)
           .toolbar {
              ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItem

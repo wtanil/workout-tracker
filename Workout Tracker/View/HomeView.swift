@@ -53,6 +53,7 @@ struct HomeView: View {
             }
          }
          .navigationTitle("Home")
+//         .navigationBarTitleDisplayMode(.inline)
          .padding([.leading, .trailing])
       }
       
