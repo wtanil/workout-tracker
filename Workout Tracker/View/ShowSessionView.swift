@@ -77,6 +77,9 @@ struct ShowSessionView: View {
          }
       }
       .alert(isPresented: $showingDeleteAlert, content: { deleteAlert })
+      .onAppear(perform: {
+         managedObjectContext.rollback()
+      })
       
    }
    
