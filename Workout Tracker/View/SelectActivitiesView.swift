@@ -51,7 +51,7 @@ struct SelectActivitiesView: View {
             }
          }
          .navigationTitle("Select exercises")
-         .navigationBarTitleDisplayMode(.inline)
+//         .navigationBarTitleDisplayMode(.inline)
          .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                navigationBarTrailingItem

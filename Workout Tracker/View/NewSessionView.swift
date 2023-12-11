@@ -12,7 +12,7 @@ struct NewSessionView: View {
    @Environment(\.managedObjectContext) var managedObjectContext
    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
    
-   @State private var name: String = "New Session"
+   @State private var name: String = ""
    @State private var note: String = ""
    @State private var date: Date = Date()
    @State var activities = [Activity]()

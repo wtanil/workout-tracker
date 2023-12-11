@@ -47,7 +47,7 @@ struct ShowSessionRow: View {
                      }
                      if activitySet.isFailure {
                         Image(systemName: "flame.fill")
-                           .foregroundColor(.blue)
+                           .foregroundColor(.red)
                      }
 //                     Spacer()
                   }

@@ -23,7 +23,7 @@ struct ExercisesView: View {
       NavigationView {
          VStack(alignment: .leading) {
             TextField("Search", text: $searchText)
-               .padding(.horizontal)
+               .padding([.leading, .trailing])
             
             List {
                ForEach(exerciseSections) { section in
@@ -43,7 +43,7 @@ struct ExercisesView: View {
                               }
                               .tint(.red)
                            }
-
+                           
                         }
                         .confirmationDialog("Are you sure?", isPresented: $showingDeleteAlert) {
                            Button("Delete", role: .destructive) {
@@ -53,9 +53,12 @@ struct ExercisesView: View {
                   }
                }
             }
+            .listStyle(.sidebar)
+            .padding(1)
          }
          .navigationTitle("Exercises")
 //         .navigationBarTitleDisplayMode(.inline)
+         .navigationViewStyle(StackNavigationViewStyle())
          .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                navigationBarTrailingItem

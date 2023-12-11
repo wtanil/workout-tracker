@@ -93,7 +93,7 @@ struct ShowSessionView: View {
          Button() {
             self.showingDeleteAlert.toggle()
          } label: {
-            Text("Delete")
+            Image(systemName: "trash")
          }
          
          NavigationLink("Edit", destination: EditSessionView(session: session))
