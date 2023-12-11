@@ -102,10 +102,10 @@ struct ShowSessionView: View {
    
    private var deleteAlert: Alert {
       Alert(title: Text("Warning"),
-            message: Text("Do you want to delete?"),
+            message: Text("Are you sure you want to delete \"\(session.displayName)\"? This action cannot be undone."),
             primaryButton: .destructive(Text("Delete"),
                                         action: deleteSession),
-            secondaryButton: .default(Text("Cancel"))
+            secondaryButton: .cancel(Text("Cancel"))
       )
    }
    
