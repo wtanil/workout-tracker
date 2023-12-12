@@ -125,16 +125,16 @@ extension PersistenceController {
    }
    
    
-//   func initialize(in context: NSManagedObjectContext) {
-//
-//      let categoryDict = initializeCategories(in: context)
-//      let equipmentDict = initializeEquipments(in: context)
-//      let forceDict = initializeForces(in: context)
-//      let levelDict = initializeLevels(in: context)
-//      let mechanicDict = initializeMechanics(in: context)
-//      let muscleDict = initializeMuscles(in: context)
-//
-//   }
+   //   func initialize(in context: NSManagedObjectContext) {
+   //
+   //      let categoryDict = initializeCategories(in: context)
+   //      let equipmentDict = initializeEquipments(in: context)
+   //      let forceDict = initializeForces(in: context)
+   //      let levelDict = initializeLevels(in: context)
+   //      let mechanicDict = initializeMechanics(in: context)
+   //      let muscleDict = initializeMuscles(in: context)
+   //
+   //   }
    
    func getFromJSON(isPreview: Bool = false) -> [Workout] {
       var source = "Workout-Data"
@@ -144,7 +144,7 @@ extension PersistenceController {
       guard let path = Bundle.main.path(forResource: source, ofType: "json") else {
          fatalError("JSON file not found!")
       }
-      // TODO: soon to be deprecated, use "let url = URL(filePath: path)"
+      
       let url = URL(fileURLWithPath: path)
       
       let decoder = JSONDecoder()
@@ -183,10 +183,13 @@ extension PersistenceController {
       
       for workout in workouts {
          let category = categoryDict[workout.category]!
-         let equipment = equipmentDict[workout.equipment ?? "other"]!
-         let force = forceDict[workout.force ?? "other"]!
+         let equipmentTemp = workout.equipment ?? "other"
+         let equipment = equipmentDict[equipmentTemp]!
+         let forceTemp = workout.force ?? "other"
+         let force = forceDict[forceTemp]!
          let level = levelDict[workout.level]!
-         let mechanic = mechanicDict[workout.mechanic ?? "other"]!
+         let mechanicTemp = workout.mechanic ?? "other"
+         let mechanic = mechanicDict[mechanicTemp]!
          let muscle = muscleDict[workout.primaryMuscles[0]]!
          
          let newExercise = Exercise.make(in: context,
@@ -250,8 +253,12 @@ extension PersistenceController {
       }
       // end of generate preview data
       
+      
       do {
+         //         try context.performAndWait {
          try context.save()
+         //         }
+         
          return true
       } catch {
          // Replace this implementation with code to handle the error appropriately.
@@ -265,6 +272,8 @@ extension PersistenceController {
    
    func fetchCategory(in context: NSManagedObjectContext) -> [Category] {
       let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+      
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -275,6 +284,7 @@ extension PersistenceController {
    
    func fetchEquipment(in context: NSManagedObjectContext) -> [Equipment] {
       let fetchRequest: NSFetchRequest<Equipment> = Equipment.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -285,6 +295,7 @@ extension PersistenceController {
    
    func fetchForce(in context: NSManagedObjectContext) -> [Force] {
       let fetchRequest: NSFetchRequest<Force> = Force.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -295,6 +306,7 @@ extension PersistenceController {
    
    func fetchLevel(in context: NSManagedObjectContext) -> [Level] {
       let fetchRequest: NSFetchRequest<Level> = Level.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -305,6 +317,7 @@ extension PersistenceController {
    
    func fetchMechanic(in context: NSManagedObjectContext) -> [Mechanic] {
       let fetchRequest: NSFetchRequest<Mechanic> = Mechanic.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects
@@ -315,6 +328,7 @@ extension PersistenceController {
    
    func fetchMuscle(in context: NSManagedObjectContext) -> [Muscle] {
       let fetchRequest: NSFetchRequest<Muscle> = Muscle.fetchRequest()
+      fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
       do {
          let objects = try context.fetch(fetchRequest)
          return objects

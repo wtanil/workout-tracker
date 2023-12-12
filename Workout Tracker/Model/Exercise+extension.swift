@@ -31,8 +31,12 @@ extension Exercise {
    
    // instructions
    var instructionsAsArray: [String] {
-      let data = Data(instructions!.utf8)
+      guard let instructions else {
+         return [String]()
+      }
+      let data = Data(instructions.utf8)
       return (try? JSONDecoder().decode([String].self, from: data)) ?? [String]()
+      
    }
    
    var computedInstructions: [String] {

@@ -8,100 +8,116 @@
 import SwiftUI
 
 struct ShowSessionView: View {
+   @Environment(\.managedObjectContext) var managedObjectContext
+   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
    
    @ObservedObject var session: Session
    
    @State private var showingNote: Bool = false
+   @State private var showingDeleteAlert: Bool = false
    
    var body: some View {
-      VStack(alignment: .leading, spacing: 8) {
+      VStack(alignment: .leading) {
          
-         Text("\(session.displayDate)")
-            .font(.title3)
-            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-         
-         if session.displayNote != "" {
-            Toggle(showingNote ? "note \(Image(systemName: "chevron.up"))" : "note \(Image(systemName: "chevron.down"))", isOn: $showingNote)
-               .toggleStyle(.button)
-               .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-         }
-         
-         if showingNote {
-            Text("\(session.displayNote)")
-               .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-         }
+         VStack(alignment: .leading) {
             
+            Text("\(session.displayName)")
+               .modifier(SectionHeader())
+            
+            Text("\(session.displayDate)")
+            //                  .font(.body)
+            
+            if session.displayNote != "" {
+               Toggle(showingNote ? "Note \(Image(systemName: "chevron.up"))" : "Note \(Image(systemName: "chevron.down"))", isOn: $showingNote.animation())
+                  .modifier(AccessoryToggle())
+            }
+            
+            if showingNote {
+               Text("\(session.displayNote)")
+            }
+            
+            HStack { Spacer() }
+         }
          
-         List(session.activitiesAsArray) { activity in
-            Section(activity.displayExerciseName) {
+         .padding([.leading, .trailing])
+         
+         if session.activityCount == 0 {
 
-               if activity.displayTotalValue != "-" {
-                  Text("Total: \(activity.displayTotalValue)")
-               }
-               
-               if activity.displayNote != "" {
-                  Text(activity.displayNote)
-               }
-               ForEach(activity.activitySetsAsArray) {
-                  activitySet in
-                  HStack {
-                     Image(systemName: "circle.fill")
-                        .imageScale(.small)
-                        .foregroundColor(.green)
-                     Text("\(activitySet.repAsInt)")
-                     Text("x")
-                     Text("\(activitySet.displayValue)")
-                     Text(activitySet.displayUnit)
-                     (Text(Image(systemName: "scalemass")) + Text(": \(activitySet.displayTotalValue)"))
-                     Text(activitySet.displayUnit)
-                     if activitySet.isBodyWeight {
-                        Image(systemName: "person.fill")
-                           .foregroundColor(.blue)
+            Group {
+               VStack {
+                  NavigationLink {
+                     EditSessionView(session: session)
+                  } label: {
+                     HStack {
+                        Text("Add more exercises!")
                      }
-                     if activitySet.isFailure {
-                        Image(systemName: "flame.fill")
-                           .foregroundColor(.blue)
-                     }
-                     
+                     .foregroundColor(.white)
                   }
+               }
+               .padding(10)
+               .modifier(ActionButton())
+            }
+            .padding([.leading, .trailing])
+            
+            
+
+         } else {
+            ScrollView(.vertical, showsIndicators: false) {
+               ForEach(session.activitiesAsArray) { activity in
+                  ShowSessionRow(activity: activity)
                }
             }
          }
-         .listStyle(.sidebar)
+         
+         
+         Spacer()
          
       }
-      .navigationTitle(session.displayName)
+      .navigationTitle("Session")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem
          }
       }
+      .alert(isPresented: $showingDeleteAlert, content: { deleteAlert })
+      .onAppear(perform: {
+         managedObjectContext.rollback()
+      })
       
    }
    
    private var navigationBarTrailingItem: some View {
       
-      NavigationLink("Edit", destination: EditSessionView(session: session))
-      
-      // to delete, start async thread, then go back
-      
-//      Menu {
-//
-//         Divider()
-//         Button("Delete", role: .destructive) {
-//            print("asdf")
-//         }
-//      } label: {
-//         Label("", systemImage: "ellipsis")
-//      }
+      HStack {
+         Button() {
+            self.showingDeleteAlert.toggle()
+         } label: {
+            Image(systemName: "trash")
+         }
+         
+         NavigationLink("Edit", destination: EditSessionView(session: session))
+      }
    }
-}
-
-struct SessionView_Previews: PreviewProvider {
-   static var previews: some View {
+   
+   private var deleteAlert: Alert {
+      Alert(title: Text("Warning"),
+            message: Text("Are you sure you want to delete \"\(session.displayName)\"? This action cannot be undone."),
+            primaryButton: .destructive(Text("Delete"),
+                                        action: deleteSession),
+            secondaryButton: .cancel(Text("Cancel"))
+      )
+   }
+   
+   func deleteSession() {
+      managedObjectContext.delete(session)
+      do {
+         try managedObjectContext.save()
+      } catch {
+         let nsError = error as NSError
+         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+      }
       
-      let context = PersistenceController.preview.container.viewContext
-      ShowSessionView(session: Session(context: context))
-         .environment(\.managedObjectContext, context)
+      presentationMode.wrappedValue.dismiss()
    }
 }

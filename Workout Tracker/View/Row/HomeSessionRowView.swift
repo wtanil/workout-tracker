@@ -8,18 +8,33 @@
 import SwiftUI
 
 struct HomeSessionRowView: View {
-    var name: String
-    var date: String
-    var body: some View {
-        VStack(alignment: .leading) {
+   var name: String
+   var date: String
+   var activityCount: String
+   var totalValue: String
+   
+   var body: some View {
+      
+      LazyVStack(alignment: .leading) {
+         Text(name)
+            .font(.body.weight(.bold))
+            .foregroundColor(Color.red)
+         
+         Group {
             Text(date)
-            Text(name)
-        }
-    }
+               .font(.caption)
+            
+            Text("Exercises: \(activityCount)")
+            Text("Total: \(totalValue)")
+               .multilineTextAlignment(.leading)
+         }
+         .foregroundColor(Color.primary)
+      }
+   }
 }
 
 struct HomeSessionRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeSessionRowView(name: "name", date: "date")
-    }
+   static var previews: some View {
+      HomeSessionRowView(name: "name", date: "date", activityCount: "7", totalValue: "100 kg")
+   }
 }

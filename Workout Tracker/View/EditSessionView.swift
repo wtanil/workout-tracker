@@ -25,7 +25,7 @@ struct EditSessionView: View {
       self.session = session
       self._name = State(initialValue: session.displayName)
       self._note = State(initialValue: session.displayNote)
-      self._date = State(initialValue: session.date!)
+      self._date = State(initialValue: session.date ?? Date())
       self._activities = State(initialValue: session.computedActivities)
    }
    
@@ -45,7 +45,7 @@ struct EditSessionView: View {
                Section(activity.displayExerciseName) {
                   VStack(alignment: .leading) {
                      ActivityRowView(activity: activity) {
-                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: "kg")
+                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: activity.displayActivitySetUnit)
                         var setAsArray = activity.computedActivitySets
                         setAsArray.append(newSet)
                         activity.computedActivitySets = setAsArray
@@ -59,6 +59,7 @@ struct EditSessionView: View {
          }
       }
       .navigationTitle("Edit Session")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem
@@ -100,15 +101,5 @@ struct EditSessionView: View {
       }, label: {
          Text("Save")
       })
-   }
-}
-
-struct EditSessionView_Previews: PreviewProvider {
-   static var previews: some View {
-      
-      let context = PersistenceController.preview.container.viewContext
-      NewExerciseView()
-      EditSessionView(session: Session(context: context))
-         .environment(\.managedObjectContext, context)
    }
 }

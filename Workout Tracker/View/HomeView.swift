@@ -16,24 +16,45 @@ struct HomeView: View {
       
       NavigationView {
          VStack(alignment: .leading) {
-            List {
-               Section {
-                  NavigationLink("Start A New Session", destination: NewSessionView())
-               }
-               Section("Past Sessions") {
-                  ForEach(sessions) { session in
-                     
-                     NavigationLink {
-                        ShowSessionView(session: session)
-                     } label: {
-                        HomeSessionRowView(name: session.displayName, date: session.displayDate)
+            
+            HStack {
+               VStack {
+                  NavigationLink {
+                     NewSessionView()
+                  } label: {
+                     HStack {
+                        Text(Image(systemName: "plus"))
+                        Text("Start A New Session")
                      }
+                     .foregroundColor(.white)
                   }
                }
+               .padding(10)
+               .modifier(ActionButton())
+               
+               Spacer()
             }
-            .listStyle(.plain)
+            
+            Text("Past Session")
+               .padding(.top, 16)
+               .modifier(SectionHeader())
+            
+            ScrollView(.vertical, showsIndicators: false) {
+               ForEach(sessions) { session in
+                  
+                  NavigationLink {
+                     ShowSessionView(session: session)
+                  } label: {
+                     HomeSessionRowView(name: session.displayName, date: session.displayDate, activityCount: session.displayActivityCount, totalValue: session.displayTotalValues)
+                  }
+                  .padding(12)
+                  .modifier(HomeSessionRow())
+               }
+            }
          }
          .navigationTitle("Home")
+//         .navigationBarTitleDisplayMode(.inline)
+         .padding([.leading, .trailing])
       }
       
    }

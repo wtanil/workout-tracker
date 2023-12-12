@@ -11,65 +11,50 @@ struct ShowExerciseView: View {
    
    var exercise: Exercise
    
+   @State private var showingInstructions = false
+   
    var body: some View {
-      VStack {
-         HStack {
-            Text("Target muscle: \(exercise.displayMuscle)")
-            Spacer()
-         }
-         HStack {
-            Text("Category: \(exercise.displayCategory)")
-            Spacer()
-         }
-         HStack {
-            Text("Equipment: \(exercise.displayEquipment)")
-            Text("Equipment: \(exercise.equipment?.name ?? "nil")")
-            Spacer()
-         }
-         HStack {
-            Text("Force: \(exercise.displayForce)")
-            Spacer()
-         }
-         HStack {
-            Text("Level: \(exercise.displayLevel)")
-            Spacer()
-         }
-         HStack {
-            Text("Mechanic \(exercise.displayMechanic)")
-            Spacer()
-         }
-         
-         HStack {
-            Text("Link: \(exercise.displayLink)")
-            Spacer()
-         }
-         
-         HStack {
-            Text("Note: \(exercise.displayNote)")
-            Spacer()
-         }
-         
-         List {
-            ForEach(["Placeholder activity 1", "Placeholder activity 2", "Placeholder activity 3", "Placeholder activity 4"], id: \.self) { activity in
-               Text(activity)
+      ScrollView(.vertical, showsIndicators: false) {
+         VStack(alignment: .leading) {
+            Text(exercise.displayName)
+               .modifier(SectionHeader())
+            Group {
+               Text("Level: \(exercise.displayLevel)")
+               Text("Force: \(exercise.displayForce)")
+               Text("Target: \(exercise.displayMuscle)")
+               Text("Category: \(exercise.displayCategory)")
+               Text("Equipment: \(exercise.displayEquipment)")
+               Text("Mechanic: \(exercise.displayMechanic)")
+               if exercise.displayLink != "" {
+                  Text("Link: \(exercise.displayLink)")
+               }
+               if exercise.displayNote != "" {
+                  Text("Note: \(exercise.displayNote)")
+               }
             }
             
+            Toggle(showingInstructions ? "Instructions \(Image(systemName: "chevron.up"))" : "Instructions \(Image(systemName: "chevron.down"))", isOn: $showingInstructions.animation())
+               .modifier(AccessoryToggle())
+            
+            if showingInstructions {
+               VStack(alignment: .leading) {
+                  ForEach(exercise.instructionsAsArray, id: \.self) { instruction in
+                     HStack(alignment: .top) {
+                        Image(systemName: "circle")
+                           .imageScale(.small)
+                        Text("\(instruction)")
+                     }
+                  }
+               }
+            }
+            HStack {
+               Spacer()
+            }
+            Spacer()
          }
-         .listStyle(.plain)
-         
-         
-         Spacer()
       }
-      .padding(.trailing, 16)
-      .padding(.leading, 16)
-      .navigationTitle(exercise.displayName)
-   }
-}
-
-struct ShowExerciseView_Previews: PreviewProvider {
-   static var previews: some View {
-      let context = PersistenceController.preview.container.viewContext
-      ShowExerciseView(exercise: Exercise.init(context: context))
-         .environment(\.managedObjectContext, context)
+      .padding([.leading, .trailing])
+      .navigationTitle("Exercise")
+      .navigationBarTitleDisplayMode(.inline)
    }
 }

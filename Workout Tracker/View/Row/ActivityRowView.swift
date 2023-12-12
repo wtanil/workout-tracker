@@ -11,10 +11,18 @@ struct ActivityRowView: View {
    
    @ObservedObject var activity: Activity
    
-   @State var activityUnit: String = ActivityUnit.kg.rawValue
+//   @State var activityUnit: String = ActivityUnit.kg.rawValue
+   @State var activityUnit: String
    
    var newActivitySetAction: () -> ()
    var deleteActivityAction: () -> ()
+   
+   init(activity: Activity, newActivitySetAction: @escaping () -> (), deleteActivityAction: @escaping () -> ()) {
+      self.activity = activity
+      self.activityUnit = activity.displayActivitySetUnit
+      self.newActivitySetAction = newActivitySetAction
+      self.deleteActivityAction = deleteActivityAction
+   }
    
    var body: some View {
       VStack(alignment: .leading) {
@@ -40,7 +48,7 @@ struct ActivityRowView: View {
             Button(role: .destructive, action: {
                deleteActivityAction()
             }, label: {
-               Image(systemName: "trash")
+               Image(systemName: "minus.circle")
             })
          }
          ForEach(activity.activitySetsAsArray) { activitySet in
@@ -50,17 +58,5 @@ struct ActivityRowView: View {
             }
          }
       }
-   }
-}
-
-struct ActivityRowView_Previews: PreviewProvider {
-   static var previews: some View {
-      let context = PersistenceController.preview.container.viewContext
-      ActivityRowView(activity: Activity.make(in: context, note: "")) {
-         print("add")
-      } deleteActivityAction: {
-         print("delete")
-      }
-         .environment(\.managedObjectContext, context)
    }
 }

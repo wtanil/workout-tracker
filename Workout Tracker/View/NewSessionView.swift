@@ -12,7 +12,7 @@ struct NewSessionView: View {
    @Environment(\.managedObjectContext) var managedObjectContext
    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
    
-   @State private var name: String = "New Session"
+   @State private var name: String = ""
    @State private var note: String = ""
    @State private var date: Date = Date()
    @State var activities = [Activity]()
@@ -35,7 +35,7 @@ struct NewSessionView: View {
                Section(activity.displayExerciseName) {
                   VStack(alignment: .leading) {
                      ActivityRowView(activity: activity) {
-                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: "kg")
+                        let newSet = ActivitySet.make(in: managedObjectContext, rep: 0, value: 0, unit: activity.displayActivitySetUnit)
                         var setAsArray = activity.computedActivitySets
                         setAsArray.append(newSet)
                         activity.computedActivitySets = setAsArray
@@ -49,6 +49,7 @@ struct NewSessionView: View {
          }
       }
       .navigationTitle("New Session")
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar {
          ToolbarItem(placement: .navigationBarTrailing) {
             navigationBarTrailingItem

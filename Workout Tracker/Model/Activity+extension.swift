@@ -25,17 +25,6 @@ extension Activity {
       return exercise.displayName
    }
    
-   var displayTotalValue: String {
-      let activitySets = activitySetsAsArray
-      if activitySets.isEmpty {
-         return "-"
-      }
-      let totalValue: Double = activitySets.reduce(0) { $0 + $1.totalValue }
-      let unit = activitySetsAsArray[0].displayUnit
-      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: totalValue)) ?? "-"
-      return "\(string) \(unit)"
-   }
-   
    var displayNote: String { note ?? "" }
    
    var activitySetsAsArray: [ActivitySet] {
@@ -47,9 +36,53 @@ extension Activity {
       return array
    }
    
-   var bestActivitySet: ActivitySet? {
-      let array = activitySetsAsArray.sorted { $0.totalValue > $1.totalValue }
-      return array.first
+   var activitySetCount: Int {
+      sets?.count ?? 0
+   }
+   
+   var totalValues: [String: Double] {
+      let activitySets = activitySetsAsArray
+      if activitySets.isEmpty {
+         return [String: Double]()
+      }
+      let dict = Dictionary(grouping: activitySets) { $0.displayUnit
+      }
+      var sumDict = [String: Double]()
+      for (unit, sets) in dict {
+         sumDict[unit] = sets.reduce(0) { $0 + $1.totalValue }
+      }
+      
+      return sumDict
+   }
+   
+   var displayTotalValue: String {
+      let totalValuesDict = totalValues
+      let totalValue = totalValuesDict.max { $0.value > $1.value }
+      let string = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: totalValue!.value)) ?? "-"
+      return "\(string) \(totalValue!.key)"
+   }
+   
+   var displayTotalValues: String {
+      let totalValuesDict = totalValues.sorted { lhs, rhs in
+         lhs.value > rhs.value
+      }
+      if totalValuesDict.isEmpty {
+         return "-"
+      }
+      let string = totalValuesDict.map { unit, value in
+         let temp = NumberFormatter.numberFormatterDecimal.string(from: NSNumber(value: value)) ?? "-"
+         return "\(temp) \(unit)"
+      }.joined(separator: ", ")
+
+      return string
+   }
+   
+   var displayActivitySetUnit: String {
+      if activitySetCount == 0 {
+         return "kg"
+      }
+      let unit = activitySetsAsArray[0].displayUnit
+      return unit
    }
    
    var computedActivitySets: [ActivitySet] {
