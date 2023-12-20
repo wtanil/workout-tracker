@@ -32,6 +32,7 @@
 		AA8CCACA2B10C05900A972A9 /* ActivityUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8CCAC92B10C05900A972A9 /* ActivityUnit.swift */; };
 		AA9D0DCB2B329F9300086ADA /* GraphExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D0DCA2B329F9300086ADA /* GraphExerciseView.swift */; };
 		AA9D0DCF2B32A07600086ADA /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D0DCE2B32A07600086ADA /* ExerciseInfo.swift */; };
+		AA9D0DD22B32C2E000086ADA /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = AA9D0DD12B32C2E000086ADA /* DGCharts */; };
 		AAA229532B01DFCE0088A7EA /* ActivitySetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA229522B01DFCE0088A7EA /* ActivitySetRowView.swift */; };
 		AAA229572B020E5D0088A7EA /* ActivityRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA229562B020E5D0088A7EA /* ActivityRowView.swift */; };
 		AAB9BD8E2B031ED700FFD585 /* ShowSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9BD8D2B031ED700FFD585 /* ShowSessionView.swift */; };
@@ -118,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9D0DD22B32C2E000086ADA /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +317,9 @@
 			dependencies = (
 			);
 			name = "Workout Tracker";
+			packageProductDependencies = (
+				AA9D0DD12B32C2E000086ADA /* DGCharts */,
+			);
 			productName = "Workout Tracker";
 			productReference = AA439D3F2AEF9C7600D2D383 /* Workout Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -387,6 +392,9 @@
 				Base,
 			);
 			mainGroup = AA439D362AEF9C7600D2D383;
+			packageReferences = (
+				AA9D0DD02B32C2E000086ADA /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = AA439D402AEF9C7600D2D383 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -800,6 +808,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA9D0DD02B32C2E000086ADA /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA9D0DD12B32C2E000086ADA /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA9D0DD02B32C2E000086ADA /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		AA439D4D2AEF9C7800D2D383 /* Workout_Tracker.xcdatamodeld */ = {
